@@ -1,8 +1,4 @@
-new fullpage('#fullpage', {
-	//options here
-	autoScrolling:true,
-	scrollHorizontally: true
+$(document).ready(function() {
+    $('#fullpage').fullpage();
+    $.fn.fullpage.setAllowScrolling(false);
 });
-
-//methods
-fullpage_api.setAllowScrolling(false);
