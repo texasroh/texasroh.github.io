@@ -1,4 +1,8 @@
 $(document).ready(function() {
-    $('#fullpage').fullpage();
-    $.fn.fullpage.setAllowScrolling(false);
+    $('#fullpage').fullpage({
+        navigation: true,
+        slidesNavigation:true,
+        keyboardScrolling:true,
+    });
+    $.fn.fullpage.setAllowScrolling(true);
 });
