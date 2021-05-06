@@ -73,15 +73,15 @@ $(document).ready(function() {
 		onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){}
 	});
 });
-/*
-new fullpage('#fullpage', {
-	//options here
-    licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-    navigation: true,
-	autoScrolling:true,
-	scrollHorizontally: true
-});
 
-//methods
-fullpage_api.setAllowScrolling(false);
-*/
+
+
+anime({
+    targets: '#test',
+    strokeDashoffset: [anime.setDashoffset, 0],
+    easing: 'easeInOutSine',
+    duration: 1500,
+    delay: function(el, i) { return i * 250 },
+    direction: 'alternate',
+    loop: true
+});
