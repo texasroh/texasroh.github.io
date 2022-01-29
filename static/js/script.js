@@ -1,3 +1,3 @@
 function startUp() {
-	document.querySelector('.header').innerHTML('hello');
+	document.querySelector('.header').innerHTML = "Hello World";
 }
