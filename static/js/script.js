@@ -7,5 +7,27 @@ document.querySelectorAll("*[data-include-path]").forEach((element) => {
 		}
 	};
 	xhttp.open('GET', includePath, true);
-	xhttp.send();
+	xhttp.send();	
+});
+
+function showSideMenu(){
+	document.querySelector('.side-menu-background').style.display = 'block';
+	document.querySelector('.side-menu').style.right='0';
+}
+
+function hideSideMenu(){
+	document.querySelector('.side-menu').style.right='-100vw';
+	document.querySelector('.side-menu-background').style.display = 'none';
+}
+
+document.querySelector('.side-menu-open').addEventListener('click', () => {
+	showSideMenu();
+});
+
+document.querySelector('.side-menu-background').addEventListener('click', () => {
+	hideSideMenu();
+});
+
+document.querySelector('.side-menu-close').addEventListener('click', () => {
+	hideSideMenu();
 });

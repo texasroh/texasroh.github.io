@@ -26,9 +26,13 @@ body{
 a {color: white; text-decoration: none;}
 a:hover{color:white;}
 button:hover{color:white !important;}
+ul {margin:0; padding:0;}
 
 
 /* Header */
-header {background-color: var(--dark2); padding:8px 0; }
+header {background-color: var(--dark2); padding:8px 0; position:fixed; top:0; width:100vw;}
 
-.side-menu-toggle {color:white;}
+.side-menu-open {color:white;}
+.side-menu-close {color:white; margin-top: 8px; margin-right:12px;}
+.side-menu-background{background-color:#00000044; width:100vw; height:100vh; position:fixed;top:0; left:0; display:none;}
+.side-menu{background-color:var(--dark2); position:fixed; top:0; right:-100vw; width:15em; height:100vh; transition: .25s ease;}
