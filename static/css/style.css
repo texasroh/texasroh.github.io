@@ -1,0 +1,34 @@
+:root {
+    --dark1: #06080D;
+    --dark2: #171C26;
+    --dark3: #283040;
+    --dark4: #5E6D8C;
+    --dark5: #4D5D73;
+
+    --bluedark1: #03090D;
+    --bluedark2: #0B1E26;
+    --bluedark3: #254A59;
+    --bluedark4: #3E768C;
+    --bluedark5: #B0CDD9;
+}
+
+body{
+    color:white;
+    background-color: var(--dark3);
+}
+
+.logo {width:40px;}
+.mobile-only {display:none;}
+@media screen and (max-width: 970px) {
+    .mobile-only {display:block;}
+    .pc-only {display:none;}
+}
+a {color: white; text-decoration: none;}
+a:hover{color:white;}
+button:hover{color:white !important;}
+
+
+/* Header */
+header {background-color: var(--dark2); padding:8px 0; }
+
+.side-menu-toggle {color:white;}
