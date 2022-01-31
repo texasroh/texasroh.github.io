@@ -29,6 +29,7 @@ a:hover{color:white;}
 button:hover{color:white !important;}
 ul {margin:0; padding:0;}
 li {list-style: none;}
+.section-title {text-align:center;}
 
 
 /* Header */
@@ -42,5 +43,11 @@ header.header--dark{background-color:var(--dark2); padding:8px 0;}
 
 
 /* Home */
-#home {padding-top:56px;height:700px; background: url(../image/milky-way.jpg); background-size:cover; position:relative;}
-#home:before{content:''; background: linear-gradient(to bottom, #28304000, #283040ff); position:absolute; left:0; top:0; height:100%;width: 100%;}
+#home {padding:4em 0; background: url(../image/milky-way.jpg); background-size:cover; background-repeat:no-repeat; position:relative;z-index:-2;}
+#home:before{content:''; background: linear-gradient(to bottom, #28304000, #283040ff); position:absolute; left:0; top:0; height:100%;width: 100%; z-index:-1;}
+#home .myphoto{width:150px; border-radius:100%; padding:1em 0;}
+#home .section-description{padding: 1em 0;}
+#home .section-button {border: solid 2px white; background:transparent; color:white; border-radius:5px; padding: .5em 1em;}
+
+/* About me */
+#about-me {background-color:var(--dark4); padding:4em 0;}
