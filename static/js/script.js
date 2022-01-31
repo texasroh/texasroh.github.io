@@ -1,3 +1,5 @@
+'use strict';
+
 document.querySelectorAll("*[data-include-path]").forEach((element) => {
 	var includePath = element.dataset.includePath;
 	var xhttp = new XMLHttpRequest();
@@ -30,4 +32,15 @@ document.querySelector('.side-menu-background').addEventListener('click', () => 
 
 document.querySelector('.side-menu-close').addEventListener('click', () => {
 	hideSideMenu();
+});
+
+var header = document.querySelector('header');
+var headerHeight = header.getBoundingClientRect().height;
+document.addEventListener('scroll', () => {
+	console.log(window.scrollY, headerHeight);
+	if (window.scrollY > headerHeight){
+		header.classList.add('header--dark');
+	} else {
+		header.classList.remove('header--dark');
+	}
 });

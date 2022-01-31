@@ -15,6 +15,7 @@
 body{
     color:white;
     background-color: var(--dark3);
+    /* margin-top:56px; */
 }
 
 .logo {width:40px;}
@@ -27,12 +28,19 @@ a {color: white; text-decoration: none;}
 a:hover{color:white;}
 button:hover{color:white !important;}
 ul {margin:0; padding:0;}
+li {list-style: none;}
 
 
 /* Header */
-header {background-color: var(--dark2); padding:8px 0; position:fixed; top:0; width:100vw;}
+header {background-color: transparent; padding:12px 0; position:fixed; top:0; width:100vw;z-index:1; transition: all .2s ease-in-out}
+header.header--dark{background-color:var(--dark2); padding:8px 0;}
 
 .side-menu-open {color:white;}
 .side-menu-close {color:white; margin-top: 8px; margin-right:12px;}
 .side-menu-background{background-color:#00000044; width:100vw; height:100vh; position:fixed;top:0; left:0; display:none;}
-.side-menu{background-color:var(--dark2); position:fixed; top:0; right:-100vw; width:15em; height:100vh; transition: .25s ease;}
+.side-menu{background-color:var(--dark2); position:fixed; top:0; right:-100vw; width:15em; height:100vh; transition: .25s ease; text-align:right;}
+
+
+/* Home */
+#home {padding-top:56px;height:700px; background: url(../image/milky-way.jpg); background-size:cover; position:relative;}
+#home:before{content:''; background: linear-gradient(to bottom, #28304000, #283040ff); position:absolute; left:0; top:0; height:100%;width: 100%;}
