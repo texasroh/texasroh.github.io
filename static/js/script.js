@@ -1,5 +1,7 @@
 'use strict';
 
+
+// Ajax method to load same ul-li list from other html file
 document.querySelectorAll("*[data-include-path]").forEach((element) => {
 	var includePath = element.dataset.includePath;
 	var xhttp = new XMLHttpRequest();
@@ -12,6 +14,7 @@ document.querySelectorAll("*[data-include-path]").forEach((element) => {
 	xhttp.send();	
 });
 
+// sidebar for mobile
 function showSideMenu(){
 	document.querySelector('.side-menu-background').style.display = 'block';
 	document.querySelector('.side-menu').style.right='0';
@@ -34,13 +37,24 @@ document.querySelector('.side-menu-close').addEventListener('click', () => {
 	hideSideMenu();
 });
 
+
+// for sticky top header
 var header = document.querySelector('header');
 var headerHeight = header.getBoundingClientRect().height;
 document.addEventListener('scroll', () => {
-	console.log(window.scrollY, headerHeight);
 	if (window.scrollY > headerHeight){
 		header.classList.add('header--dark');
 	} else {
 		header.classList.remove('header--dark');
 	}
 });
+
+
+
+// for menu item click
+document.querySelectorAll('header *[data-link]').forEach((element) => {
+	let link = element.dataset.link
+	element.addEventListener('click', () => {
+		document.querySelector(link).scrollIntoView();
+	})
+})

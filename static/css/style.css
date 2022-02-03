@@ -31,10 +31,14 @@ ul {margin:0; padding:0;}
 li {list-style: none;}
 .section-title {text-align:center;}
 
+/* Section Common */
+section {padding:4em 0;}
+.section-description {text-align:center;}
 
 /* Header */
 header {background-color: transparent; padding:12px 0; position:fixed; top:0; width:100vw;z-index:1; transition: all .2s ease-in-out}
 header.header--dark{background-color:var(--dark2); padding:8px 0;}
+header *[data-link] {cursor:pointer;}
 
 .side-menu-open {color:white;}
 .side-menu-close {color:white; margin-top: 8px; margin-right:12px;}
@@ -50,4 +54,11 @@ header.header--dark{background-color:var(--dark2); padding:8px 0;}
 #home .section-button {border: solid 2px white; background:transparent; color:white; border-radius:5px; padding: .5em 1em;}
 
 /* About me */
-#about-me {background-color:var(--dark4); padding:4em 0;}
+/* #about-me {} */
+#about .major-group {margin:3em 0;}
+#about .major .icon {width:170px; height:170px; line-height:170px; font-size: 70px;margin:10px auto; border:solid 3px var(--bluedark5); border-radius:100%; color:var(--bluedark5); transition: all .2s ease-in-out}
+#about .major:hover .icon {border-color: var(--dark5); color:var(--dark5); transform:rotate(20deg) scale(1.1)}
+/* #about-me .major .title {font-weight:bold; padding:10px 0; font-size: 20px;} */
+
+/* Skills */
+#skill {background-color:var(--bluedark2);}
