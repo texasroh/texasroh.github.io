@@ -52,9 +52,10 @@ document.addEventListener('scroll', () => {
 
 
 // for menu item click
-document.querySelectorAll('header *[data-link]').forEach((element) => {
+document.querySelectorAll('*[data-link]').forEach((element) => {
 	let link = element.dataset.link
 	element.addEventListener('click', () => {
-		document.querySelector(link).scrollIntoView();
+		hideSideMenu();
+		document.querySelector(link).scrollIntoView({behavior: 'smooth'});
 	})
 })

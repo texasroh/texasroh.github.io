@@ -23,7 +23,12 @@
                 </div>
                 <div class="col-auto">
                     <div class="pc-only">
-                        <div data-include-path="snippet/main-menu.html"></div>
+                        <!-- <div data-include-path="snippet/main-menu.html"></div> -->
+                        <ul>
+                            <li data-link="#home">Home</li>
+                            <li data-link="#about">About me</li>
+                            <li data-link="#skill">Skills</li>
+                        </ul>
                     </div>
                     <div class="mobile-only">
                         <button class="btn side-menu-open"><i class="fas fa-bars"></i></button>
@@ -34,7 +39,12 @@
                                     <div class="btn side-menu-close"><i class="fas fa-times"></i></div>
                                 </div>
                             </div>
-                            <div data-include-path="snippet/main-menu.html"></div>
+                            <!-- <div data-include-path="snippet/main-menu.html"></div> -->
+                            <ul>
+                                <li data-link="#home">Home</li>
+                                <li data-link="#about">About me</li>
+                                <li data-link="#skill">Skills</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -47,7 +57,7 @@
                 <img src="static/image/myphoto.jpg" class="myphoto">
                 <h1 class="section-title">Hello,<br> I'm a dream runner</h1>
                 <h4 class="section-description">A data scientist with passionate development skill<br>and statistics knowledge</h4>
-                <button class="section-button">Contact Me</button>
+                <button class="section-button" data-link="#contact">Contact Me</button>
             </div>
         </section>
         <section id="about">

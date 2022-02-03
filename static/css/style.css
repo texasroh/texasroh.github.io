@@ -11,10 +11,13 @@
     --bluedark4: #3E768C;
     --bluedark5: #B0CDD9;
 }
-
+* {
+    box-sizing:border-box;
+}
 body{
     color:white;
     background-color: var(--dark3);
+    cursor:default;
     /* margin-top:56px; */
 }
 
@@ -39,13 +42,14 @@ section {padding:4em 0;}
 header {background-color: transparent; padding:12px 0; position:fixed; top:0; width:100vw;z-index:1; transition: all .2s ease-in-out}
 header.header--dark{background-color:var(--dark2); padding:8px 0;}
 header *[data-link] {cursor:pointer;}
-header .pc-only li[data-link] {display: inline-block; padding: 8px 12px; margin: 0 4px; border-radius: 5px;}
+header .pc-only li[data-link] {display: inline-block; padding: 8px 12px; margin: 0 4px; border-radius: 5px; }
 header .pc-only li[data-link]:hover {border: solid 1px white;}
 
 .side-menu-open {color:white;}
 .side-menu-close {color:white; margin-top: 8px; margin-right:12px;}
 .side-menu-background{background-color:#00000044; width:100vw; height:100vh; position:fixed;top:0; left:0; display:none;}
 .side-menu{background-color:var(--dark2); position:fixed; top:0; right:-100vw; width:15em; height:100vh; transition: .25s ease; text-align:right;}
+.side-menu ul li {padding: 10px 20px;}
 
 
 /* Home */
@@ -64,3 +68,10 @@ header .pc-only li[data-link]:hover {border: solid 1px white;}
 
 /* Skills */
 #skill {background-color:var(--bluedark2);}
+
+
+
+
+@media screen and (max-width:768px) {
+    #about .major {margin-top: 2em;}
+}
