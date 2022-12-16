@@ -1,5 +1,9 @@
+import { createHashRouter, RouterProvider } from "react-router-dom";
+
+const hashRouter = createHashRouter([]);
+
 function App() {
-    return <div>hello world</div>;
+    return <RouterProvider router={hashRouter} />;
 }
 
 export default App;
