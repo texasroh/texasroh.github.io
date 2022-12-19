@@ -1,10 +1,17 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
+import Layout from "./components/Layout";
 import Home from "./routes/Home";
 
 const hashRouter = createHashRouter([
     {
         path: `${process.env.PUBLIC_URL}/`,
-        element: <Home />,
+        element: <Layout />,
+        children: [
+            {
+                index: true,
+                element: <Home />,
+            },
+        ],
     },
 ]);
 
