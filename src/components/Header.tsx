@@ -9,7 +9,7 @@ const Header = () => {
         i18n.changeLanguage(isEng ? "ko" : "en");
     };
     return (
-        <header className="fixed top-0 z-10 flex h-16 w-full items-center justify-center bg-red-200">
+        <header className="fixed top-0 z-10 flex h-16 w-full items-center justify-center border-b">
             <div className="container mx-3 flex items-center justify-between">
                 <div className="select-none text-xl font-bold">
                     <Link to="/">June</Link>
