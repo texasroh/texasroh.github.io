@@ -1,6 +1,7 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./routes/Home";
+import NotFound from "./routes/NotFound";
 
 const hashRouter = createHashRouter([
     {
@@ -12,6 +13,10 @@ const hashRouter = createHashRouter([
                 element: <Home />,
             },
         ],
+    },
+    {
+        path: "*",
+        element: <NotFound />,
     },
 ]);
 
