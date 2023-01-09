@@ -10,7 +10,7 @@ const Educations = () => {
             <div>2016.01 ~ 2020.05</div>
           </div>
           <ul className="ml-6">
-            <li>Business Analytics</li>
+            <li>Master of Business Analytics</li>
             <li>Master of Business Administration</li>
           </ul>
         </div>
