@@ -1,8 +1,8 @@
-import HomeSection from "./HomeSection";
+import HomeSection from "../../components/HomeSection";
 
-const OtherExperiences = () => {
+const Experiences = () => {
   return (
-    <HomeSection title="Other Experience">
+    <HomeSection title="Experiences">
       <div>hello</div>
       <div>hello</div>
       <div>hello</div>
@@ -14,4 +14,4 @@ const OtherExperiences = () => {
   );
 };
 
-export default OtherExperiences;
+export default Experiences;

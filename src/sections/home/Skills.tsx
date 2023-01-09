@@ -1,4 +1,4 @@
-import HomeSection from "./HomeSection";
+import HomeSection from "../../components/HomeSection";
 
 const Skills = () => {
   return (

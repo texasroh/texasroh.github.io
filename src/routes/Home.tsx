@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
-import Educations from "../components/Educations";
-import Experiences from "../components/Experiences";
-import Intro from "../components/Intro";
-import OtherExperiences from "../components/OtherExperiences";
-import Skills from "../components/Skills";
-import ToyProjects from "../components/ToyProjects";
+import Educations from "../sections/home/Educations";
 import myPhoto from "../images/my_photo.jpg";
+import Intro from "../sections/home/Intro";
+import Experiences from "../sections/home/Experiences";
+import OtherExperiences from "../sections/home/OtherExperiences";
+import ToyProjects from "../sections/home/ToyProjects";
+import Skills from "../sections/home/Skills";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
