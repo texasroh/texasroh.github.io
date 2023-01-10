@@ -42,6 +42,9 @@ const Skills = () => {
                   Django Rest Framework
                 </span>
                 <span className="rounded bg-amber-700 py-1 px-2 text-sm text-white">
+                  Node.js
+                </span>
+                <span className="rounded bg-amber-700 py-1 px-2 text-sm text-white">
                   Nest.js
                 </span>
                 <span className="rounded bg-amber-700 py-1 px-2 text-sm text-white">
