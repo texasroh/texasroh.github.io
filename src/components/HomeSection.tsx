@@ -8,7 +8,7 @@ interface IHomeSectionProps {
 const HomeSection = ({ title, children }: IHomeSectionProps) => {
   return (
     <section className="my-12 flex flex-col md:flex-row md:space-x-12">
-      <div className="md:basis-4/12">
+      <div className="md:basis-3/12">
         <h2 className="mb-4 text-2xl font-bold text-emerald-600 md:text-right">
           {title}
         </h2>

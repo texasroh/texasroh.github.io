@@ -8,11 +8,16 @@ const Header = () => {
   const onLangClick = () => {
     i18n.changeLanguage(isEng ? "ko" : "en");
   };
+  const onLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <header className="fixed top-0 z-10 flex h-16 w-full items-center justify-center border-b bg-white">
       <div className="container mx-3 flex items-center justify-between">
         <div className="select-none text-xl font-bold">
-          <Link to="/">June</Link>
+          <div onClick={onLogoClick} className="cursor-pointer">
+            June
+          </div>
         </div>
         <div className="hidden md:block">
           <ul className="flex space-x-4">
