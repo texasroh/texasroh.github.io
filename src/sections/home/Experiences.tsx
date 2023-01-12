@@ -19,7 +19,7 @@ const Experiences = () => {
             <li className="flex flex-col md:flex-row">
               <div className="basis-1/4 font-bold">Tech Lead</div>
               <ul className="ml-4 list-disc">
-                <li></li>
+                <li>온라인 </li>
               </ul>
             </li>
             <li className="flex flex-col md:flex-row">
@@ -46,7 +46,11 @@ const Experiences = () => {
               Android Developer
             </div>
             <ul className="ml-4 list-disc">
-              <li></li>
+              <li>Galaxy Setting team</li>
+              <li>
+                PLM을 통한 일 관리, 협업툴을 이용한 개발, 버전관리, 해외
+                출장인력 관리
+              </li>
             </ul>
           </div>
         </li>

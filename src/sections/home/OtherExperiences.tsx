@@ -31,7 +31,8 @@ const OtherExperiences = () => {
               1st prize
             </a>
           </div>
-          <div></div>
+          <p>기존 제품군들과 신제품의 수요예측 및 방향성 검토</p>
+          <p>EDA, Time Series, Regressions, Classification</p>
         </li>
       </ul>
     </HomeSection>
