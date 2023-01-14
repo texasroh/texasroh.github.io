@@ -9,7 +9,11 @@ const Experiences = () => {
         <li>
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-medium">
-              <a href="https://streetsmarket.com" target="_blank">
+              <a
+                href="https://streetsmarket.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Streets Market
               </a>
             </h3>
@@ -42,7 +46,11 @@ const Experiences = () => {
         <li>
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-medium">
-              <a href="https://www.samsung.com" target="_blank">
+              <a
+                href="https://www.samsung.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 {t("samsung_electronics")}
               </a>
             </h3>

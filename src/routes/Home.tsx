@@ -27,13 +27,25 @@ const Home = () => {
           </div>
           <div className="text-center text-3xl font-bold">{t("june_name")}</div>
           <div className="flex items-center justify-center space-x-4 text-sm">
-            <a href="https://github.com/texasroh" target="_blank">
+            <a
+              href="https://github.com/texasroh"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaGithub size={30} className="text-black" />
             </a>
-            <a href="https://texasroh.blogspot.com/" target="_blank">
+            <a
+              href="https://texasroh.blogspot.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaBlogger size={30} className="text-orange-400" />
             </a>
-            <a href="https://www.linkedin.com/in/junhyeok-roh/" target="_blank">
+            <a
+              href="https://www.linkedin.com/in/junhyeok-roh/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaLinkedin size={30} className="text-blue-600" />
             </a>
           </div>
