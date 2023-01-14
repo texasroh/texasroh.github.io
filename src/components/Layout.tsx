@@ -1,7 +1,22 @@
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
+import { AnimatePresence, useScroll } from "framer-motion";
+import { useEffect } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { topIconState } from "../atoms";
 
 const Layout = () => {
+  const { scrollY } = useScroll();
+  const setToTop = useSetRecoilState(topIconState);
+  useEffect(() => {
+    scrollY.on("change", () => {
+      if (scrollY.get() >= 180) {
+        setToTop(true);
+      } else {
+        setToTop(false);
+      }
+    });
+  }, [scrollY, setToTop]);
   return (
     <>
       <Header />
