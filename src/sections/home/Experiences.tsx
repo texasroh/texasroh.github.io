@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import HomeSection from "../../components/HomeSection";
 
 const Experiences = () => {
+  const { t } = useTranslation();
   return (
     <HomeSection title="Experiences">
       <ul className="space-y-8">
@@ -12,31 +14,27 @@ const Experiences = () => {
               </a>
             </h3>
             <span className="text-sm font-medium text-gray-500">
-              2020.06 ~ Current
+              2020.06 ~ {t("current")}
             </span>
           </div>
+          <p className="py-4">{t("streets_market_desc")}</p>
           <ul className="space-y-2">
             <li className="flex flex-col md:flex-row">
-              <div className="basis-1/4 font-bold">Tech Lead</div>
+              <div className="shrink-0 basis-1/4 font-bold">Tech Lead</div>
               <ul className="ml-4 list-disc">
-                <li>
-                  온라인 밀키트 사이트 및 백오피스 개발. 새로운 비지니스 창출
-                  (shopify, OAuth, Flask)
-                </li>
-                <li>
-                  운영팀, 회계팀을 위한 ERP 시스템 개발 (Django, React, React
-                  Native)
-                </li>
-                <li>
-                  모바일로 실시간 레포트를 보여줄 수 있는 대시보드 개발 (Flask)
-                </li>
+                <li>{t("tech_lead_1st")}</li>
+                <li>{t("tech_lead_2nd")}</li>
+                <li>{t("tech_lead_3rd")}</li>
+                <li>{t("tech_lead_4th")}</li>
               </ul>
             </li>
             <li className="flex flex-col md:flex-row">
-              <div className="basis-1/4 font-bold">Data Lead</div>
+              <div className="shrink-0 basis-1/4 font-bold">Data Lead</div>
               <ul className="ml-4 list-disc">
-                <li>ETL 자동화 시스템</li>
-                <li>수요 예측과 새로운 상품도입에 관한 분석</li>
+                <li>{t("data_lead_1st")}</li>
+                <li>{t("data_lead_2nd")}</li>
+                <li>{t("data_lead_3rd")}</li>
+                <li>{t("data_lead_4th")}</li>
               </ul>
             </li>
           </ul>
@@ -45,7 +43,7 @@ const Experiences = () => {
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-medium">
               <a href="https://www.samsung.com" target="_blank">
-                Samsung Electronics
+                {t("samsung_electronics")}
               </a>
             </h3>
             <span className="text-sm font-medium text-gray-500">
@@ -53,15 +51,12 @@ const Experiences = () => {
             </span>
           </div>
           <div className="flex flex-col md:flex-row">
-            <div className="basis-1/4 flex-wrap font-bold">
-              Android Developer
+            <div className="shrink-0 basis-1/4 flex-wrap font-bold">
+              {t("android_developer")}
             </div>
             <ul className="ml-4 list-disc">
-              <li>Galaxy Setting team</li>
-              <li>
-                PLM을 통한 일 관리, 협업툴을 이용한 개발, 버전관리, 해외
-                출장인력 관리
-              </li>
+              <li>{t("and_dev_1st")}</li>
+              <li>{t("and_dev_2nd")}</li>
             </ul>
           </div>
         </li>

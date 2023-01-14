@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import HomeSection from "../../components/HomeSection";
 
 const Educations = () => {
+  const { t } = useTranslation();
   return (
     <HomeSection title="Educations">
       <ul className="ml-4 list-disc space-y-4 md:ml-0">
@@ -16,11 +18,11 @@ const Educations = () => {
         </li>
         <li>
           <div className="flex justify-between font-medium">
-            <div>경북대학교</div>
+            <div>{t("knu")}</div>
             <span className="text-sm text-gray-500">2007.03 ~ 2014.02</span>
           </div>
           <ul className="ml-6">
-            <li>전자공학부</li>
+            <li>{t("electronics")}</li>
           </ul>
         </li>
       </ul>

@@ -4,17 +4,17 @@ import langEn from "../lang/lang.en.json";
 import langKo from "../lang/lang.ko.json";
 
 const resources = {
-    en: {
-        translation: langEn,
-    },
-    ko: {
-        translation: langKo,
-    },
+  en: {
+    translation: langEn,
+  },
+  ko: {
+    translation: langKo,
+  },
 };
 
 i18n.use(initReactI18next).init({
-    resources: resources,
-    lng: "en",
+  resources,
+  lng: "en",
 });
 
 export default i18n;

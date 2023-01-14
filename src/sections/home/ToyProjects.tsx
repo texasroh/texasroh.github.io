@@ -1,7 +1,9 @@
 import HomeSection from "../../components/HomeSection";
 import { FaGithub } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const ToyProjects = () => {
+  const { t } = useTranslation();
   return (
     <HomeSection title="Toy Projects">
       <ul className="ml-4 list-disc space-y-4 md:ml-0">
@@ -15,18 +17,18 @@ const ToyProjects = () => {
             <FaGithub />
             <span>
               <a href="https://github.com/texasroh/dmvhanin" target="_blank">
-                V1
+                v1
               </a>
             </span>
             ,
             <span>
               <a href="https://github.com/texasroh/dmvhanin-v2" target="_blank">
-                V2
+                v2
               </a>
             </span>
           </div>
-          <p>버지니아, 디씨, 메릴랜드 한인 커뮤니티 사이트</p>
-          <p>Flask(V1), Django(V2), EC2, RDS, Nginx, Gunicorn, PostgreSQL</p>
+          <p>{t("dmvhanin_1st")}</p>
+          <p>Flask(v1), Django(v2), EC2, RDS, Nginx, Gunicorn, PostgreSQL</p>
         </li>
         <li>
           <div className="flex items-center space-x-2">
@@ -43,8 +45,8 @@ const ToyProjects = () => {
               <FaGithub />
             </a>
           </div>
-          <p>오프라인에서 쇼핑할때 바코드 스캔으로 온라인 쇼핑몰 가격 비교</p>
-          <p>React Native, cheerio</p>
+          <p>{t("pricescanner_1st")}</p>
+          <p>React Native, cheerio(crawling)</p>
         </li>
       </ul>
     </HomeSection>

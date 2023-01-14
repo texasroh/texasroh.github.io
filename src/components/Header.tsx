@@ -1,9 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const isEng = i18n.language === "en";
   const onLangClick = () => {
     i18n.changeLanguage(isEng ? "ko" : "en");
