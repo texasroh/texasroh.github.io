@@ -10,7 +10,7 @@ const Layout = () => {
   const setToTop = useSetRecoilState(topIconState);
   useEffect(() => {
     scrollY.on("change", () => {
-      if (scrollY.get() >= 180) {
+      if (scrollY.get() >= 200) {
         setToTop(true);
       } else {
         setToTop(false);

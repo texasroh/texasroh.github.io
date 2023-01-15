@@ -57,15 +57,12 @@ const Header = () => {
               </a>
             </motion.div>
           )}
-          <div className="hidden md:block">
-            <ul className="flex space-x-4">
-              {/* <li>{t("portfolio")}</li> */}
-              <li onClick={onLangClick} className="cursor-pointer select-none">
-                {isEng ? "한국어" : "Eng"}
-              </li>
-            </ul>
-          </div>
-          <div className="md:hidden"></div>
+          <ul className="flex space-x-4">
+            {/* <li>{t("portfolio")}</li> */}
+            <li onClick={onLangClick} className="cursor-pointer select-none">
+              {isEng ? "한국어" : "Eng"}
+            </li>
+          </ul>
         </div>
       </AnimatePresence>
     </header>
