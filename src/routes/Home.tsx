@@ -1,5 +1,6 @@
 import Educations from "../sections/home/Educations";
 import myPhoto from "../images/my_photo.jpg";
+import myPhoto2 from "../images/my_photo2.jpg";
 import Intro from "../sections/home/Intro";
 import Experiences from "../sections/home/Experiences";
 import OtherExperiences from "../sections/home/OtherExperiences";
@@ -20,8 +21,8 @@ const Home = () => {
         <div className="basis-1/3">
           <div className="grid grid-cols-2 overflow-hidden rounded-lg">
             <img src={myPhoto} className="md:w-" />
-            <img src={myPhoto} className="md:w-" />
-            <img src={myPhoto} className="md:w-" />
+            <img src={myPhoto2} className="md:w-" />
+            <img src={myPhoto2} className="md:w-" />
             <img src={myPhoto} className="md:w-" />
           </div>
         </div>
