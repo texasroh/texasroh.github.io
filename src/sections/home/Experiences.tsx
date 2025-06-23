@@ -14,11 +14,43 @@ const Experiences = () => {
                 target="_blank"
                 rel="noreferrer"
               >
+                Avomd
+              </a>
+            </h3>
+            <span className="text-sm font-medium text-gray-500">
+              2023.05 ~ {t("current")}
+            </span>
+          </div>
+          <p className="py-4">{t("avomd_desc")}</p>
+          <ul className="space-y-2">
+            <li className="flex flex-col md:flex-row">
+              <div className="shrink-0 basis-1/4 font-bold">Senior SWE</div>
+              <ul className="ml-4 list-disc">
+                <li>{t("avomd_1st")}</li>
+                <li>{t("avomd_2nd")}</li>
+                <li>{t("avomd_3rd")}</li>
+                <li>{t("avomd_4th")}</li>
+                <li>{t("avomd_5th")}</li>
+                <li>{t("avomd_6th")}</li>
+                <li>{t("avomd_7th")}</li>
+                <li>{t("avomd_8th")}</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-medium">
+              <a
+                href="https://streetsmarket.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Streets Market
               </a>
             </h3>
             <span className="text-sm font-medium text-gray-500">
-              2020.06 ~ {t("current")}
+              2020.06 ~ 2023.03
             </span>
           </div>
           <p className="py-4">{t("streets_market_desc")}</p>

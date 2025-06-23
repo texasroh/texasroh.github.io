@@ -22,6 +22,9 @@ const Skills = () => {
                   React.js
                 </span>
                 <span className="rounded bg-stone-500 py-1 px-2 text-sm text-white">
+                  Expo
+                </span>
+                <span className="rounded bg-stone-500 py-1 px-2 text-sm text-white">
                   React Native
                 </span>
                 <span className="rounded bg-stone-500 py-1 px-2 text-sm text-white">
@@ -80,6 +83,21 @@ const Skills = () => {
                 </span>
                 <span className="rounded bg-lime-700 py-1 px-2 text-sm text-white">
                   OAuth
+                </span>
+                <span className="rounded bg-lime-700 py-1 px-2 text-sm text-white">
+                  AWS
+                </span>
+                <span className="rounded bg-lime-700 py-1 px-2 text-sm text-white">
+                  Firebase
+                </span>
+                <span className="rounded bg-lime-700 py-1 px-2 text-sm text-white">
+                  Supabase
+                </span>
+                <span className="rounded bg-lime-700 py-1 px-2 text-sm text-white">
+                  Docker
+                </span>
+                <span className="rounded bg-lime-700 py-1 px-2 text-sm text-white">
+                  MSA
                 </span>
               </div>
             </li>

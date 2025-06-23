@@ -1,5 +1,5 @@
 import HomeSection from "../../components/HomeSection";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaGooglePlay } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const ToyProjects = () => {
@@ -7,6 +7,29 @@ const ToyProjects = () => {
   return (
     <HomeSection title="Toy Projects">
       <ul className="ml-4 list-disc space-y-4 md:ml-0">
+        <li>
+          <div className="flex items-center space-x-2">
+            <h4 className="text-lg font-medium">
+              <a
+                href="https://dmvhanin.com"
+                target="_blank"
+                className="inline"
+                rel="noreferrer"
+              >
+                1 to 50
+              </a>
+            </h4>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.muracano.onetofifty"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaGooglePlay />
+            </a>
+          </div>
+          <p>{t("onetofifty_1st")}</p>
+          <p>Expo, React native, Firebase, Supabase</p>
+        </li>
         <li>
           <div className="flex items-center space-x-2">
             <h4 className="text-lg font-medium">
