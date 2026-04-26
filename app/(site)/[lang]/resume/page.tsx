@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getResumeContent } from '@/lib/content'
-import { ResumePage } from '@/components/resume/ResumePage'
-import { SiteShell } from '@/components/SiteShell'
-import { UI, isLanguage, otherLanguage } from '@/lib/site'
+import { ResumeRoute } from '@/components/resume/ResumeRoute'
+import { UI, isLanguage } from '@/lib/site'
 
 type PageProps = {
   params: Promise<{ lang: string }>
@@ -17,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: UI[lang].nav.resume,
+    title: { absolute: UI[lang].nav.resume },
     robots: {
       index: false,
       follow: false,
@@ -32,11 +30,5 @@ export default async function ResumeRoutePage({ params }: PageProps) {
     notFound()
   }
 
-  const resume = getResumeContent(lang)
-
-  return (
-    <SiteShell lang={lang} section="resume" alternateHref={`/${otherLanguage(lang)}/resume/`}>
-      <ResumePage lang={lang} resume={resume} />
-    </SiteShell>
-  )
+  return <ResumeRoute lang={lang} />
 }

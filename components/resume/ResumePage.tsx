@@ -1,9 +1,9 @@
 import type { Language } from '@/lib/site'
 import { UI } from '@/lib/site'
-import type { ResumeContent, ResumeItem } from '@/lib/content'
-import { IconSvg, MdxContent, StoreBadge } from '@/components/MdxContent'
+import type { RenderedResumeContent, RenderedResumeItem } from '@/lib/content'
+import { IconSvg, StoreBadge } from '@/components/MdxContent'
 
-export function ResumePage({ lang, resume }: { lang: Language; resume: ResumeContent }) {
+export function ResumePage({ lang, resume }: { lang: Language; resume: RenderedResumeContent }) {
   return (
     <article className="mx-auto max-w-5xl px-6">
       <Hero lang={lang} />
@@ -44,15 +44,22 @@ function Hero({ lang }: { lang: Language }) {
   )
 }
 
-function Intro({ lang, item }: { lang: Language; item: ResumeItem }) {
+function HtmlBlock({ html, className }: { html: string; className?: string }) {
+  if (!html) {
+    return null
+  }
+  return <div className={className} dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+function Intro({ lang, item }: { lang: Language; item: RenderedResumeItem }) {
   return (
     <ResumeSection title={UI[lang].resume.sections.intro}>
-      <MdxContent source={item.content} className="prose-post text-ink-300" />
+      <HtmlBlock html={item.html} className="prose-post text-ink-300" />
     </ResumeSection>
   )
 }
 
-function Experiences({ lang, items }: { lang: Language; items: ResumeItem[] }) {
+function Experiences({ lang, items }: { lang: Language; items: RenderedResumeItem[] }) {
   return (
     <ResumeSection title={UI[lang].resume.sections.experience}>
       <div className="space-y-12">
@@ -73,7 +80,7 @@ function Experiences({ lang, items }: { lang: Language; items: ResumeItem[] }) {
               {item.description ? (
                 <p className="mb-4 text-sm italic text-ink-400">{item.description}</p>
               ) : null}
-              <MdxContent source={item.content} className="prose-post text-ink-300" />
+              <HtmlBlock html={item.html} className="prose-post text-ink-300" />
               <TechStack items={item.tech_stack} className="mt-5" />
             </div>
           </article>
@@ -83,7 +90,7 @@ function Experiences({ lang, items }: { lang: Language; items: ResumeItem[] }) {
   )
 }
 
-function OtherExperiences({ lang, items }: { lang: Language; items: ResumeItem[] }) {
+function OtherExperiences({ lang, items }: { lang: Language; items: RenderedResumeItem[] }) {
   return (
     <ResumeSection title={UI[lang].resume.sections.otherExperience}>
       <div className="space-y-10">
@@ -134,7 +141,7 @@ function OtherExperiences({ lang, items }: { lang: Language; items: ResumeItem[]
                 </div>
               ) : null}
 
-              <MdxContent source={item.content} className="prose-post text-[0.95rem] text-ink-300" />
+              <HtmlBlock html={item.html} className="prose-post text-[0.95rem] text-ink-300" />
               <TechStack items={item.tech_stack} className="mt-4" />
             </div>
           </article>
@@ -144,7 +151,7 @@ function OtherExperiences({ lang, items }: { lang: Language; items: ResumeItem[]
   )
 }
 
-function Skills({ lang, item }: { lang: Language; item: ResumeItem }) {
+function Skills({ lang, item }: { lang: Language; item: RenderedResumeItem }) {
   return (
     <ResumeSection title={UI[lang].resume.sections.skills}>
       <div className="grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
@@ -170,7 +177,7 @@ function Skills({ lang, item }: { lang: Language; item: ResumeItem }) {
   )
 }
 
-function Education({ lang, items }: { lang: Language; items: ResumeItem[] }) {
+function Education({ lang, items }: { lang: Language; items: RenderedResumeItem[] }) {
   return (
     <ResumeSection title={UI[lang].resume.sections.education}>
       <div className="space-y-8">

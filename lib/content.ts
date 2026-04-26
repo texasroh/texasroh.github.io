@@ -46,6 +46,16 @@ export type ResumeContent = {
   educations: ResumeItem[]
 }
 
+export type RenderedResumeItem = Omit<ResumeItem, 'content'> & { html: string }
+
+export type RenderedResumeContent = {
+  intro?: RenderedResumeItem
+  experiences: RenderedResumeItem[]
+  otherExperiences: RenderedResumeItem[]
+  skills?: RenderedResumeItem
+  educations: RenderedResumeItem[]
+}
+
 export type Post = {
   id: string
   lang: Language

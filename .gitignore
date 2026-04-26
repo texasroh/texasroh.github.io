@@ -2,6 +2,7 @@ node_modules/
 .next/
 out/
 _site/
+public/data/
 tsconfig.tsbuildinfo
 
 .DS_Store
