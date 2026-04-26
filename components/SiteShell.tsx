@@ -28,19 +28,26 @@ export function SiteShell({
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
           <Link
             href={`/${lang}/blog/`}
-            className="text-xl font-semibold tracking-tight text-ink-50 transition-colors hover:text-accent"
+            className="text-ink-50 transition-colors hover:text-accent"
+            aria-label={t.site.title}
           >
-            {t.site.title}
+            <SiteLogo />
           </Link>
 
           <nav className="flex items-center gap-1 text-sm sm:gap-2">
-            <NavLink href={`/${lang}/blog/`} active={section === 'blog'}>
-              {t.nav.blog}
-            </NavLink>
+            {section === 'resume' ? (
+              <>
+                <NavLink href={`/${lang}/blog/`} active={false}>
+                  {t.nav.blog}
+                </NavLink>
+                <span className="mx-2 h-5 w-px bg-ink-800" />
+              </>
+            ) : null}
+            {/* TODO: re-enable resume nav link later
             <NavLink href={`/${lang}/resume/`} active={section === 'resume'}>
               {t.nav.resume}
             </NavLink>
-            <span className="mx-2 h-5 w-px bg-ink-800" />
+            */}
             <Link
               href={languageHref}
               title={noTranslation ? t.nav.languageNoTranslation : undefined}
@@ -91,6 +98,30 @@ export function SiteShell({
         </div>
       </footer>
     </>
+  )
+}
+
+function SiteLogo() {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-9 w-9 fill-current"
+      role="img"
+      aria-hidden="true"
+    >
+      <g
+        fontSize="18"
+        fontWeight="700"
+        textAnchor="middle"
+        dominantBaseline="central"
+      >
+        <text x="8" y="8">ㅁ</text>
+        <text x="24" y="8">ㄹ</text>
+        <text x="8" y="24">ㅋ</text>
+        <text x="24" y="24">ㄴ</text>
+      </g>
+    </svg>
   )
 }
 

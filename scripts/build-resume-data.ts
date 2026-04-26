@@ -40,7 +40,30 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+async function watch() {
+  const chokidar = await import('chokidar')
+  await main()
+  const target = path.join(root, '_resume')
+  const watcher = chokidar.watch(target, {
+    ignoreInitial: true,
+    awaitWriteFinish: { stabilityThreshold: 100, pollInterval: 50 },
+  })
+  let timer: NodeJS.Timeout | null = null
+  const trigger = (eventPath: string) => {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      console.log(`\nResume file changed: ${path.relative(root, eventPath)}`)
+      main().catch((err) => console.error(err))
+    }, 100)
+  }
+  watcher.on('add', trigger).on('change', trigger).on('unlink', trigger)
+  console.log(`Watching ${path.relative(root, target)}/**/*.md for changes...`)
+}
+
+const isWatch = process.argv.includes('--watch')
+const run = isWatch ? watch : main
+
+run().catch((err) => {
   console.error(err)
   process.exit(1)
 })

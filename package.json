@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "tsx scripts/build-resume-data.ts",
-    "dev": "next dev",
+    "dev": "concurrently -n data,next -c yellow,blue \"tsx scripts/build-resume-data.ts --watch\" \"next dev\"",
     "prebuild": "tsx scripts/build-resume-data.ts",
     "build": "next build",
     "start": "next start",
@@ -24,6 +23,8 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.20",
+    "chokidar": "^5.0.0",
+    "concurrently": "^9.2.1",
     "postcss": "^8.5.10",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
