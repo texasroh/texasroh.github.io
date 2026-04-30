@@ -42,7 +42,7 @@ export const UI = {
     },
     blog: {
       title: 'Blog',
-      description: 'Notes on what I learn while building',
+      description: 'Notes on this and that',
       noPosts: 'No posts yet.',
       backToList: '<- Back to list',
       readingTime: 'min read',
@@ -78,7 +78,7 @@ export const UI = {
     },
     blog: {
       title: '블로그',
-      description: '개발하면서 배운 것들을 기록합니다',
+      description: '이런저런 기록을 남깁니다',
       noPosts: '아직 작성된 글이 없습니다.',
       backToList: '<- 목록으로 돌아가기',
       readingTime: '분 분량',
