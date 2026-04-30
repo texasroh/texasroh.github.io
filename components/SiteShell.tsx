@@ -110,17 +110,16 @@ function SiteLogo() {
       role="img"
       aria-hidden="true"
     >
-      <g
-        fontSize="18"
-        fontWeight="700"
-        textAnchor="middle"
-        dominantBaseline="central"
-      >
-        <text x="8" y="8">ㅁ</text>
-        <text x="24" y="8">ㄹ</text>
-        <text x="8" y="24">ㅋ</text>
-        <text x="24" y="24">ㄴ</text>
-      </g>
+      {/* main pad */}
+      <ellipse cx="16" cy="22" rx="7" ry="6" />
+      {/* outer-left toe */}
+      <ellipse cx="6" cy="13.5" rx="2.8" ry="3.8" transform="rotate(-25 6 13.5)" />
+      {/* inner-left toe */}
+      <ellipse cx="12" cy="8" rx="2.5" ry="3.7" transform="rotate(-10 12 8)" />
+      {/* inner-right toe */}
+      <ellipse cx="20" cy="8" rx="2.5" ry="3.7" transform="rotate(10 20 8)" />
+      {/* outer-right toe */}
+      <ellipse cx="26" cy="13.5" rx="2.8" ry="3.8" transform="rotate(25 26 13.5)" />
     </svg>
   )
 }
