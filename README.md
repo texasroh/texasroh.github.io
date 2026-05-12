@@ -1,5 +1,65 @@
 # texasroh.github.io
 
+## Firebase view counter setup
+
+This site can show:
+
+- total site views
+- total unique visitors
+- per-post views
+- per-post unique visitors
+
+### 1. Create a Firebase project
+
+Create a Firebase project and enable Firestore in production mode.
+
+### 2. Add environment variables
+
+Copy `.env.example` to `.env.local` and fill in the Firebase web app values.
+
+### 3. Firestore document structure
+
+The app writes to the `view_stats` collection.
+
+- `view_stats/site-totals`
+  - `totalViews`
+  - `uniqueVisitors`
+  - `updatedAt`
+- `view_stats/{encodeURIComponent(postPath)}`
+  - `path`
+  - `title`
+  - `lang`
+  - `views`
+  - `uniqueVisitors`
+  - `updatedAt`
+
+### 4. Recommended Firestore rules for initial rollout
+
+This is a lightweight first version, so writes come from the client. Keep rules narrow and review abuse risk before production scale.
+
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /view_stats/{docId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false;
+    }
+  }
+}
+```
+
+### 5. Counting behavior
+
+- every page load increments view count
+- unique visitor count increments once per browser per page every 24 hours
+- site totals increment alongside page totals
+
+### 6. Hardening idea for later
+
+If abuse becomes a concern, move write operations behind Cloud Functions or a small edge endpoint and keep Firestore read-only from the client.
+
 Personal site — resume + blog, built with Next.js static export and deployed to GitHub Pages.
 
 - **Blog**: `/ko/blog/`, `/en/blog/` (indexed)
