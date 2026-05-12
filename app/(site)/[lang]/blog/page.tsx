@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { getPostsByLanguage } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { SiteShell } from '@/components/SiteShell'
+import { PostCardViewCounter } from '@/components/PostCardViewCounter'
+import { ViewCounter } from '@/components/ViewCounter'
 import { UI, absoluteUrl, isLanguage, otherLanguage } from '@/lib/site'
 
 type PageProps = {
@@ -54,7 +56,8 @@ export default async function BlogPage({ params }: PageProps) {
           <h1 className="mb-4 text-5xl font-bold tracking-tight text-ink-50 sm:text-6xl">
             {t.blog.title}
           </h1>
-          <p className="text-lg text-ink-400">{t.blog.description}</p>
+          <p className="mb-5 text-lg text-ink-400">{t.blog.description}</p>
+          <ViewCounter mode="site" lang={lang} />
         </header>
 
         {posts.length === 0 ? (
@@ -64,8 +67,9 @@ export default async function BlogPage({ params }: PageProps) {
             {posts.map((post) => (
               <article key={post.id} className="group">
                 <Link href={post.url} className="block no-underline">
-                  <div className="mb-2 flex flex-wrap items-baseline gap-4 text-sm text-ink-500">
+                  <div className="mb-2 flex flex-wrap items-center gap-3 text-sm text-ink-500">
                     <time dateTime={post.date}>{formatDate(post.date, lang)}</time>
+                    <PostCardViewCounter lang={lang} path={post.url} />
                     {post.tags.length > 0 ? (
                       <div className="flex flex-wrap gap-1.5">
                         {post.tags.map((tag) => (

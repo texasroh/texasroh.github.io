@@ -5,6 +5,7 @@ import { getAllPosts, getPostBySlug, getPostTranslation } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { MdxContent } from '@/components/MdxContent'
 import { SiteShell } from '@/components/SiteShell'
+import { ViewCounter } from '@/components/ViewCounter'
 import { UI, absoluteUrl, isLanguage, otherLanguage } from '@/lib/site'
 
 type PageProps = {
@@ -98,11 +99,22 @@ export default async function PostPage({ params }: PageProps) {
         </Link>
 
         <header className="mb-10 border-b border-ink-800/60 pb-8">
-          <div className="mb-3 flex items-baseline gap-4 text-sm text-ink-500">
+          <div className="mb-3 flex flex-wrap items-baseline gap-4 text-sm text-ink-500">
             <time dateTime={post.date}>{formatDate(post.date, post.lang)}</time>
             <span>
               · {post.readingMinutes} {t.blog.readingTime}
             </span>
+          </div>
+          <div className="mb-6">
+            <ViewCounter
+              mode="page"
+              lang={post.lang}
+              target={{
+                path: post.url,
+                title: post.title,
+                lang: post.lang,
+              }}
+            />
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.15] tracking-tight text-ink-50 sm:text-5xl">
             {post.title}
