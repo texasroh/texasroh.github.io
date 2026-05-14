@@ -27,7 +27,7 @@ Senior Software Engineer
    `avo-worker` + `avo-miniworker` 두 형제 워커 구조 / RabbitMQ + ECS Fargate / Whisper 음성→텍스트 파이프라인
 
 3. **환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행**
-   모듈 정의를 백엔드(Python)에서 평가 / 프론트엔드 결과와 완전히 동일 보장 /
+   모듈 정의를 백엔드(Python)에서 평가 / 프론트엔드 결과와 일치하도록 설계 /
    Batch + N Jobs 진행 상태 관리 + Lambda orchestration / 환자 cohort 일괄 처리
 
 4. **EB → ECS Fargate 마이그레이션**
@@ -112,7 +112,7 @@ flowchart TB
 
 - **장애 자동 격리** — 한 프로바이더가 죽어도 의료진이 인지하지 못한 채 응답이 전달됨.
 - **모델 교체 deploy zero** — 새 모델 도입은 DB 레코드 + 트래픽 비율 조정만으로.
-- **자산 노출 면 제거** — V2 이후 prompt 본문이 네트워크 경계를 넘지 않는다.
+- **자산 노출 면 제거** — V2 적용 트래픽에서 prompt 본문이 네트워크 경계를 넘지 않음.
 - **무중단 회귀 전환** — fail-open diff 모니터링 + 점진 분배로 큰 구조 변경을 incident 없이 진행 중.
 
 ---
@@ -167,7 +167,7 @@ flowchart LR
 
 - 모듈 정의(JSON 트리)를 Python으로 평가하는 엔진 신규 구축.
 - 카드 변수, 트리거 체인, 중첩 조건부 문구, EHR 데이터 참조 노드 처리 등 모든 노드 타입을 재현.
-- 프론트엔드(JS) 평가 결과와 **완전히 동일** — 빌더 미리보기와 실제 환자 결과가 갈라지면 의료 안전 사고로 직결.
+- 프론트엔드(JS) 평가 결과와 **일치하도록 설계** — 빌더 미리보기와 실제 환자 결과가 갈라지면 의료 안전 사고로 직결.
 - 같은 모듈 트리 → 텍스트 변환 자산을 [[1. 프로덕션 LLM 플랫폼]]의 V2 prompt 조립과 공유.
 
 **핵심 흐름 — 자동 비동기 다중 평가**
@@ -218,16 +218,14 @@ flowchart TB
     subgraph VPC_b ["VPC"]
         subgraph Pub_b ["Public Subnet (모두)"]
             ELB
-            EBInst["EB EC2 Instance<br/>웹 + 워커 + 의존성<br/>단일 배포 단위"]
+            EBInst["EB EC2 Instance<br/>웹 + 의존성<br/>단일 배포 단위"]
             RDS_b[(RDS)]
             Redis_b[(Redis)]
-            MQ_b[("RabbitMQ")]
         end
     end
     ELB --> EBInst
     EBInst --> RDS_b
     EBInst --> Redis_b
-    EBInst --> MQ_b
 ```
 
 **After — ECS Fargate**
@@ -244,6 +242,7 @@ flowchart TB
         subgraph Priv ["Private Subnet"]
             API["API task<br/>ECS Fargate"]
             Mini["miniworker task<br/>ECS Fargate"]
+            Worker["avo-worker task<br/>ECS Fargate<br/>(이후 deprecated)"]
             RDS[(RDS)]
             Redis[(Redis)]
             MQ[("RabbitMQ")]
@@ -254,6 +253,7 @@ flowchart TB
     Mini --> RDS
     API --> Redis
     Mini --> MQ
+    MQ -.-> Worker
     Bastion -.->|SSH 터널| RDS
 ```
 
