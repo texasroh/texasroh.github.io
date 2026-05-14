@@ -216,7 +216,7 @@ flowchart LR
     Internet_b((Internet)) --> ELB["EB ELB"]
     Dev_b((Developer / CI)) -.->|"SSH<br/>정적 SG ingress"| EBInst
     subgraph VPC_b ["VPC"]
-        subgraph Pub_b ["Public Subnet (모두)"]
+        subgraph Pub_b ["Public Subnet"]
             direction LR
             ELB
             EBInst["EB EC2 Instance<br/>웹 + 의존성<br/>단일 배포 단위"]
@@ -243,12 +243,12 @@ flowchart LR
             ALB[ALB]
             Bastion["Bastion (EC2)"]
         end
-        subgraph Priv ["Private Subnet · ECS Fargate"]
+        subgraph Priv ["Private Subnet"]
             direction LR
-            API["API task"]
+            API["API task<br/>ECS Fargate"]
             MQ[("RabbitMQ")]
-            Mini["miniworker task"]
-            Worker["avo-worker task<br/>(이후 deprecated)"]
+            Mini["miniworker task<br/>ECS Fargate"]
+            Worker["avo-worker task<br/>ECS Fargate<br/>(이후 deprecated)"]
             RDS[(RDS)]
             Redis[(Redis)]
         end
