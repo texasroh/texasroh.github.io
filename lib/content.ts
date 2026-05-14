@@ -251,8 +251,8 @@ export const getResumeContent = cache((lang: Language): ResumeContent => {
   }
 })
 
-export const getPortfolioSource = cache((): string => {
-  const filePath = path.join(PORTFOLIO_DIR, 'portfolio.md')
+export const getPortfolioSource = cache((lang: Language): string => {
+  const filePath = path.join(PORTFOLIO_DIR, lang, 'portfolio.md')
   if (!fs.existsSync(filePath)) {
     return ''
   }

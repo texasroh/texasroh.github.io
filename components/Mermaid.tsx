@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 
 let mermaidPromise: Promise<typeof import('mermaid').default> | null = null
 
@@ -20,17 +20,14 @@ function loadMermaid() {
   return mermaidPromise
 }
 
-let counter = 0
-
 export function Mermaid({ code }: { code: string }) {
-  const ref = useRef<HTMLDivElement>(null)
+  const reactId = useId().replace(/:/g, '')
   const [svg, setSvg] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
-    counter += 1
-    const id = `mermaid-${counter}`
+    const id = `mermaid-${reactId}`
 
     loadMermaid()
       .then((mermaid) => mermaid.render(id, code))
@@ -41,14 +38,16 @@ export function Mermaid({ code }: { code: string }) {
       })
       .catch((err) => {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Failed to render diagram')
+          const message = err instanceof Error ? err.message : String(err)
+          console.error('[Mermaid] render failed:', message, { code })
+          setError(message)
         }
       })
 
     return () => {
       cancelled = true
     }
-  }, [code])
+  }, [code, reactId])
 
   if (error) {
     return (
@@ -61,7 +60,6 @@ export function Mermaid({ code }: { code: string }) {
   if (!svg) {
     return (
       <div
-        ref={ref}
         className="my-4 flex h-32 items-center justify-center rounded-md bg-ink-900/40 text-sm text-ink-500"
         aria-busy="true"
       >

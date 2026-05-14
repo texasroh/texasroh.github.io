@@ -32,7 +32,7 @@ export default async function PortfolioPage({ params }: PageProps) {
     notFound()
   }
 
-  const source = getPortfolioSource()
+  const source = getPortfolioSource(lang)
 
   return (
     <SiteShell lang={lang} section="portfolio" alternateHref={`/${otherLanguage(lang)}/portfolio/`}>
