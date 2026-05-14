@@ -23,7 +23,7 @@ Senior Software Engineer
    멀티 프로바이더 추상화 + 서비스별 fallback /
    Prompt 보안 V1→V2 + diff 모니터링
 
-2. **비동기 작업 인프라 — Celery + ML 워커**
+2. **비동기 작업 인프라 — Celery + AI 모델 워커**
    **heavy worker** + **light worker** 두 형제 워커 구조 / RabbitMQ + ECS Fargate / Whisper 음성→텍스트 파이프라인
 
 3. **환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행**
@@ -116,13 +116,13 @@ flowchart TB
 
 ---
 
-## 2. 비동기 작업 인프라 — Celery + ML 워커
+## 2. 비동기 작업 인프라 — Celery + AI 모델 워커
 
 ### 2.1 진행 배경
 
 - 임상 가이드라인 PDF 파싱, 음성→텍스트 변환 같은 **CPU·메모리·시간이 무거운 작업**이 동기 API에 섞이면서 응답 지연·타임아웃을 유발.
-- 작업 성격이 너무 다름 — 큰 ML 추론과 짧은 DB 작업이 한 워커에 묶이면 한쪽 폭주가 다른 쪽을 마비.
-- 임상 도메인 — 작업 유실은 곧 환자 데이터 누락. at-least-once 보장과 워커 장애 복원이 기본 요구사항.
+- 작업 성격이 너무 다름 — 큰 AI 모델 추론과 짧은 DB 작업이 한 워커에 묶이면 한쪽 폭주가 다른 쪽을 마비.
+- 작업 유실은 곧 환자 데이터 누락. at-least-once 보장과 워커 장애 복원이 기본 요구사항.
 
 ### 2.2 상세 내용
 
@@ -130,7 +130,7 @@ flowchart TB
 flowchart LR
     API[Django API] -->|publish| MQ[(RabbitMQ)]
     MQ --> MW["light worker<br/>Django 강결합<br/>AI Scribe · 긴 LLM API · 짧은 비동기"]
-    MQ --> ML["heavy worker<br/>별도 서비스<br/>PDF parser (로컬 ML)"]
+    MQ --> ML["heavy worker<br/>별도 서비스<br/>PDF parser (로컬 모델)"]
     MW -.->|read/write| DB[(Postgres)]
     API -.->|read/write| DB
     ML -->|webhook| API
@@ -138,12 +138,12 @@ flowchart LR
 
 - 두 형제 워커로 분리: **heavy worker**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **light worker**(긴 llm api 호출 · 메모리 부담 큼 · 짧은 DB 작업).
 - 워커 장애 복원 설정으로 워커가 죽거나 재시작해도 메시지는 다른 워커로 재배달 (at-least-once).
-- AI Scribe 음성 처리는 긴 오디오를 청크 분할 + 병렬 Whisper 호출로 흡수, Whisper API도 멀티 프로바이더 폴백 적용. (관련: [[1. 프로덕션 LLM 플랫폼]])
+- AI Scribe 음성 처리는 긴 오디오를 청크 분할 + 병렬 Whisper 호출로 흡수, Whisper API도 멀티 프로바이더 폴백 적용.
 
 ### 2.3 성과 및 인사이트
 
 - **API 응답 시간 안정** — 무거운 작업이 워커 티어에 격리되어 API는 사용자 요청 처리에만 집중.
-- **장애 격리** — ML 의존성 폭주가 Django API에 전파되지 않음. 워커 단위 독립 스케일링.
+- **장애 격리** — AI 모델 의존성 폭주가 Django API에 전파되지 않음. 워커 단위 독립 스케일링.
 - **작업 유실 0** — 워커가 죽거나 재시작해도 메시지가 다른 워커로 재배달.
 
 ### 2.4 기여도
