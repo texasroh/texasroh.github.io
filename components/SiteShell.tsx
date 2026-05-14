@@ -43,14 +43,16 @@ export function SiteShell({
                 <span className="mx-2 h-5 w-px bg-ink-800" />
               </>
             ) : null}
-            <NavLink href={`/${lang}/portfolio/`} active={section === 'portfolio'}>
-              {t.nav.portfolio}
-            </NavLink>
-            {/* TODO: re-enable resume nav link later
-            <NavLink href={`/${lang}/resume/`} active={section === 'resume'}>
-              {t.nav.resume}
-            </NavLink>
-            */}
+            {section === 'resume' ? (
+              <NavLink href={`/${lang}/portfolio/`} active={false}>
+                {t.nav.portfolio}
+              </NavLink>
+            ) : null}
+            {section === 'portfolio' ? (
+              <NavLink href={`/${lang}/resume/`} active={false}>
+                {t.nav.resume}
+              </NavLink>
+            ) : null}
             <Link
               href={languageHref}
               title={noTranslation ? t.nav.languageNoTranslation : undefined}
