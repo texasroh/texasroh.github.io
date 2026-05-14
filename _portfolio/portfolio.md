@@ -11,7 +11,7 @@ Senior Software Engineer
 ## 한 줄 요약
 
 > 의료 SaaS **Avo MD**에서 3년간 백엔드를 담당.
-> **멀티 프로바이더 LLM 플랫폼**, **비동기 작업 인프라**, **환자 코호트 평가(백엔드 Module Evaluator)** 세 축을 직접 설계·운영.
+> **멀티 프로바이더 LLM 플랫폼**, **비동기 작업 인프라**, **환자 cohort 평가(백엔드 Module Evaluator)** 세 축을 직접 설계·운영.
 
 ---
 
@@ -26,9 +26,9 @@ Senior Software Engineer
 2. **비동기 작업 인프라 — Celery + ML 워커로 CPU 무거운 작업 분리**
    `avo-worker` + `avo-miniworker` 두 형제 워커 구조 / RabbitMQ + ECS Fargate / Whisper 음성→텍스트 파이프라인
 
-3. **환자 코호트 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행**
+3. **환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행**
    모듈 정의를 백엔드(Python)에서 평가 / 프론트엔드 결과와 완전히 동일 보장 /
-   Batch + N Jobs 진행 상태 관리 + Lambda orchestration / 환자 코호트 일괄 처리
+   Batch + N Jobs 진행 상태 관리 + Lambda orchestration / 환자 cohort 일괄 처리
 
 4. **EB → ECS Fargate 마이그레이션**
    서비스 단위 운영으로 전환 / OIDC keyless CI/CD 파이프라인 간략 소개
@@ -100,7 +100,7 @@ flowchart TB
 ```
 
 - 발행 시점 prompt 스냅샷을 사용 → 모듈이 수정돼도 과거 발행본으로 롤백 가능.
-- 모듈 변환·prompt 조립을 백엔드로 가져오면서 같은 변환 자산을 코호트 평가 챕터의 Module Evaluator도 공유. (관련: [[3. 환자 코호트 평가 — 백엔드 Module Evaluator]])
+- 모듈 변환·prompt 조립을 백엔드로 가져오면서 같은 변환 자산을 cohort 평가 챕터의 Module Evaluator도 공유. (관련: [[3. 환자 cohort 평가 — 백엔드 Module Evaluator]])
 
 **diff 모니터링**
 
@@ -152,14 +152,14 @@ flowchart LR
 - **avo-worker** — 단독 구축 (별도 레포 초기 셋업부터 운영까지).
 - **avo-miniworker** — **초기 구조·흐름 단독 설계**, MVP 이후 고도화는 팀 협업.
 
-## 3. 환자 코호트 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행
+## 3. 환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행
 
 ### 3.1 진행 배경
 
 - 기존: 의료진이 환자 **한 명씩 수기로** 모듈에 입력하고 결과 확인.
 - 임상 모듈은 프론트엔드(JS)에서만 돌아감 → 자동화·일괄 처리 불가능.
-- 신규 요구: Epic 코호트(예: 당뇨 환자 50명) 선택 → 백엔드가 EHR 데이터를 가져와 **N명을 자동으로 동시 평가**.
-- 해결할 두 문제: (1) 모듈을 **백엔드에서 동일 결과**로 돌리는 엔진 (2) **코호트 단위 비동기 다중 실행** orchestration.
+- 신규 요구: Epic cohort(예: 당뇨 환자 50명) 선택 → 백엔드가 EHR 데이터를 가져와 **N명을 자동으로 동시 평가**.
+- 해결할 두 문제: (1) 모듈을 **백엔드에서 동일 결과**로 돌리는 엔진 (2) **cohort 단위 비동기 다중 실행** orchestration.
 
 ### 3.2 상세 내용
 
@@ -174,7 +174,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    Cohort["코호트 선택<br/>환자 N명"] --> API[Django API]
+    Cohort["cohort 선택<br/>환자 N명"] --> API[Django API]
     API -->|"bulk create<br/>진행 상태 관리"| Batch[("Batch + N Jobs")]
     Batch -->|"비동기 동시 실행"| EHR["EHR Data Processor<br/>Lambda"]
     EHR --> Evaluator["module-evaluator<br/>Lambda"]
@@ -189,10 +189,10 @@ flowchart LR
 
 ### 3.3 성과 및 인사이트
 
-- **수기 → 자동** — 코호트 한 번 선택으로 N명이 동시에 평가됨.
+- **수기 → 자동** — cohort 한 번 선택으로 N명이 동시에 평가됨.
 - **클라이언트 의존 제거** — 모듈이 프론트엔드뿐 아니라 백엔드 어디서든 동일 결과로 실행.
 - **외부 장애 격리** — EHR API 장애가 Lambda에서 소진, Django API는 영향 없음.
-- **모듈 → 코호트 분석 도구로 확장** — 같은 모듈이 1명 진료, N명 코호트 분석에 동시 활용.
+- **모듈 → cohort 분석 도구로 확장** — 같은 모듈이 1명 진료, N명 cohort 분석에 동시 활용.
 
 ### 3.4 기여도
 
