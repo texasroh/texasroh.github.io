@@ -35,7 +35,7 @@ Senior Software Engineer
 
 ### 부록
 
-**기타 백엔드 기여** — Auth(Firebase+Django) 통합, N+1, 인덱싱·쿼리 최적화, 검색
+**기타 백엔드 기여** — Auth(Firebase+Django) 통합, N+1, 인덱싱·쿼리 최적화
 
 ---
 
@@ -283,4 +283,3 @@ flowchart LR
 | **Auth — Firebase + Django 통합** | Firebase OAuth → Django 매핑, OAuth 마이그레이션, duplicate email 처리 |
 | **N+1 해결**                      | 메인 페이지, 관리자 화면 등 hot path의 N+1 쿼리 제거                   |
 | **인덱싱 · 쿼리 최적화**          | 복합/단일 인덱스 추가, prefetch + only/defer 조합으로 응답 시간 단축   |
-| **검색**                          | Fuzzy search 개선, publish history 백필의 race condition 처리          |
