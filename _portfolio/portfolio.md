@@ -212,11 +212,12 @@ flowchart LR
 **Before — Elastic Beanstalk**
 
 ```mermaid
-flowchart TB
+flowchart LR
     Internet_b((Internet)) --> ELB["EB ELB"]
     Dev_b((Developer / CI)) -.->|"SSH<br/>정적 SG ingress"| EBInst
     subgraph VPC_b ["VPC"]
         subgraph Pub_b ["Public Subnet (모두)"]
+            direction LR
             ELB
             EBInst["EB EC2 Instance<br/>웹 + 의존성<br/>단일 배포 단위"]
             RDS_b[(RDS)]
@@ -231,18 +232,19 @@ flowchart TB
 **After — ECS Fargate**
 
 ```mermaid
-flowchart TB
+flowchart LR
     Internet((Internet)) --> ALB
     Dev((Developer / CI)) -.->|"SSH<br/>동적 SG<br/>ingress → revoke"| Bastion
 
     subgraph VPC ["VPC"]
+        direction LR
         subgraph Pub ["Public Subnet"]
-            direction LR
+            direction TB
             ALB[ALB]
             Bastion["Bastion (EC2)"]
         end
         subgraph Priv ["Private Subnet · ECS Fargate"]
-            direction TB
+            direction LR
             API["API task"]
             MQ[("RabbitMQ")]
             Mini["miniworker task"]
@@ -281,3 +283,4 @@ flowchart TB
 | **Auth — Firebase + Django 통합** | Firebase OAuth → Django 매핑, OAuth 마이그레이션, duplicate email 처리 |
 | **N+1 해결**                      | 메인 페이지, 관리자 화면 등 hot path의 N+1 쿼리 제거                   |
 | **인덱싱 · 쿼리 최적화**          | 복합/단일 인덱스 추가, prefetch + only/defer 조합으로 응답 시간 단축   |
+| **검색**                          | Fuzzy search 개선, publish history 백필의 race condition 처리          |
