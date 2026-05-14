@@ -48,7 +48,7 @@ Senior Software Engineer
 - **임상 도메인** — LLM이 의료진의 가이드라인 답변·AI Scribe 노트 작성 등 임상 워크플로를 직접 보조 → 외부 프로바이더 장애가 진료를 멈추게 해선 안 됨.
 - 단일 OpenAI 직접 호출 → 프로바이더 한 곳의 장애가 그대로 서비스 중단 (SPOF).
 - 서비스마다 요구가 달라짐 — 어떤 서비스는 **최신 모델**을, 어떤 서비스는 **안정성·레이턴시**를 우선.
-- prompt 자체가 영업 자산 → 클라이언트·네트워크 노출을 막아야 함.
+- prompt 자체가 내부 자산 → 클라이언트·네트워크 노출을 막아야 함.
 
 ### 1.2 멀티 프로바이더 추상화 + 폴백
 
@@ -234,20 +234,30 @@ flowchart TB
 flowchart TB
     Internet((Internet)) --> ALB
     Dev((Developer / CI)) -.->|"SSH<br/>동적 SG<br/>ingress → revoke"| Bastion
+
     subgraph VPC ["VPC"]
         subgraph Pub ["Public Subnet"]
+            direction LR
             ALB[ALB]
             Bastion["Bastion (EC2)"]
         end
         subgraph Priv ["Private Subnet"]
-            API["API task<br/>ECS Fargate"]
-            Mini["miniworker task<br/>ECS Fargate"]
-            Worker["avo-worker task<br/>ECS Fargate<br/>(이후 deprecated)"]
-            RDS[(RDS)]
-            Redis[(Redis)]
-            MQ[("RabbitMQ")]
+            direction TB
+            subgraph Compute ["ECS Fargate tasks"]
+                direction LR
+                API[API]
+                Mini[miniworker]
+                Worker["avo-worker<br/>(이후 deprecated)"]
+            end
+            subgraph Data ["Data"]
+                direction LR
+                MQ[("RabbitMQ")]
+                RDS[(RDS)]
+                Redis[(Redis)]
+            end
         end
     end
+
     ALB --> API
     API --> MQ
     MQ --> Mini
