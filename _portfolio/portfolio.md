@@ -130,14 +130,14 @@ flowchart TB
 ```mermaid
 flowchart LR
     API[Django API] -->|publish| MQ[(RabbitMQ)]
-    MQ --> MW["avo-miniworker<br/>Django 강결합<br/>AI Scribe · 짧은 비동기 작업"]
+    MQ --> MW["avo-miniworker<br/>Django 강결합<br/>AI Scribe · 긴 LLM API · 짧은 비동기"]
     MQ --> ML["avo-worker<br/>별도 서비스<br/>PDF parser (로컬 ML)"]
     MW -.->|read/write| DB[(Postgres)]
     API -.->|read/write| DB
     ML -->|webhook| API
 ```
 
-- 두 형제 워커로 분리: **ML 워커**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **Django 비동기 워커**(모노레포 · 짧은 DB 작업).
+- 두 형제 워커로 분리: **ML 워커**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **Django 비동기 워커**(긴 llm api 호출 · 큰 메모리 점유 · 짧은 DB 작업).
 - Celery 설정(task_acks_late + reject_on_worker_lost)으로 워커가 죽거나 재시작해도 메시지는 다른 워커로 재배달 (at-least-once).
 - AI Scribe 음성 처리는 긴 오디오를 청크 분할 + 병렬 Whisper 호출로 흡수, Whisper API도 멀티 프로바이더 폴백 적용. (관련: [[1. 프로덕션 LLM 플랫폼]])
 
