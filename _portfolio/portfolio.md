@@ -241,30 +241,24 @@ flowchart TB
             ALB[ALB]
             Bastion["Bastion (EC2)"]
         end
-        subgraph Priv ["Private Subnet"]
+        subgraph Priv ["Private Subnet · ECS Fargate"]
             direction TB
-            subgraph Compute ["ECS Fargate tasks"]
-                direction LR
-                API[API]
-                Mini[miniworker]
-                Worker["avo-worker<br/>(이후 deprecated)"]
-            end
-            subgraph Data ["Data"]
-                direction LR
-                MQ[("RabbitMQ")]
-                RDS[(RDS)]
-                Redis[(Redis)]
-            end
+            API["API task"]
+            MQ[("RabbitMQ")]
+            Mini["miniworker task"]
+            Worker["avo-worker task<br/>(이후 deprecated)"]
+            RDS[(RDS)]
+            Redis[(Redis)]
         end
     end
 
     ALB --> API
     API --> MQ
+    API --> Redis
+    API --> RDS
     MQ --> Mini
     MQ -.-> Worker
-    API --> RDS
     Mini --> RDS
-    API --> Redis
     Bastion -.->|SSH 터널| RDS
 ```
 
@@ -282,9 +276,8 @@ flowchart TB
 
 # 부록 — 기타 백엔드 기여
 
-| 영역                              | 내용                                                                                                                                |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Auth — Firebase + Django 통합** | Firebase OAuth → Django 매핑, OAuth 마이그레이션, duplicate email 처리                                                              |
-| **N+1 해결**                      | 메인 페이지, 관리자 화면 등 hot path의 N+1 쿼리 제거                                                                                |
-| **인덱싱 · 쿼리 최적화**          | 복합/단일 인덱스 추가, prefetch + only/defer 조합으로 응답 시간 단축                                                                |
-| **검색**                          | Fuzzy search 개선, publish history 백필의 race condition 처리                                                                       |
+| 영역                              | 내용                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------- |
+| **Auth — Firebase + Django 통합** | Firebase OAuth → Django 매핑, OAuth 마이그레이션, duplicate email 처리 |
+| **N+1 해결**                      | 메인 페이지, 관리자 화면 등 hot path의 N+1 쿼리 제거                   |
+| **인덱싱 · 쿼리 최적화**          | 복합/단일 인덱스 추가, prefetch + only/defer 조합으로 응답 시간 단축   |
