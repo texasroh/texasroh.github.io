@@ -24,7 +24,7 @@ Senior Software Engineer
    Prompt 보안 V1→V2 + diff 모니터링
 
 2. **비동기 작업 인프라 — Celery + ML 워커**
-   `avo-worker` + `avo-miniworker` 두 형제 워커 구조 / RabbitMQ + ECS Fargate / Whisper 음성→텍스트 파이프라인
+   **heavy worker** + **light worker** 두 형제 워커 구조 / RabbitMQ + ECS Fargate / Whisper 음성→텍스트 파이프라인
 
 3. **환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행**
    모듈 정의를 백엔드(Python)에서 평가 / 프론트엔드 결과와 일치하도록 설계 /
@@ -100,7 +100,6 @@ flowchart TB
 ```
 
 - 발행 시점 prompt 스냅샷을 사용 → 모듈이 수정돼도 과거 발행본으로 롤백 가능.
-- 모듈 변환·prompt 조립을 백엔드로 가져오면서 같은 변환 자산을 cohort 평가 챕터의 Module Evaluator도 공유. (관련: [[3. 환자 cohort 평가 — 백엔드 Module Evaluator]])
 
 **diff 모니터링**
 
@@ -130,14 +129,14 @@ flowchart TB
 ```mermaid
 flowchart LR
     API[Django API] -->|publish| MQ[(RabbitMQ)]
-    MQ --> MW["avo-miniworker<br/>Django 강결합<br/>AI Scribe · 긴 LLM API · 짧은 비동기"]
-    MQ --> ML["avo-worker<br/>별도 서비스<br/>PDF parser (로컬 ML)"]
+    MQ --> MW["light worker<br/>Django 강결합<br/>AI Scribe · 긴 LLM API · 짧은 비동기"]
+    MQ --> ML["heavy worker<br/>별도 서비스<br/>PDF parser (로컬 ML)"]
     MW -.->|read/write| DB[(Postgres)]
     API -.->|read/write| DB
     ML -->|webhook| API
 ```
 
-- 두 형제 워커로 분리: **ML 워커**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **Django 비동기 워커**(긴 llm api 호출 · 메모리 부담 큼 · 짧은 DB 작업).
+- 두 형제 워커로 분리: **heavy worker**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **light worker**(긴 llm api 호출 · 메모리 부담 큼 · 짧은 DB 작업).
 - 워커 장애 복원 설정으로 워커가 죽거나 재시작해도 메시지는 다른 워커로 재배달 (at-least-once).
 - AI Scribe 음성 처리는 긴 오디오를 청크 분할 + 병렬 Whisper 호출로 흡수, Whisper API도 멀티 프로바이더 폴백 적용. (관련: [[1. 프로덕션 LLM 플랫폼]])
 
@@ -149,8 +148,8 @@ flowchart LR
 
 ### 2.4 기여도
 
-- **avo-worker** — 단독 구축 (별도 레포 초기 셋업부터 운영까지).
-- **avo-miniworker** — **초기 구조·흐름 단독 설계**, MVP 이후 고도화는 팀 협업.
+- **heavy worker** — 단독 구축 (별도 레포 초기 셋업부터 운영까지).
+- **light worker** — **초기 구조·흐름 단독 설계**, MVP 이후 고도화는 팀 협업.
 
 ## 3. 환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행
 
@@ -247,8 +246,8 @@ flowchart LR
             direction LR
             API["API task<br/>ECS Fargate"]
             MQ[("RabbitMQ")]
-            Mini["miniworker task<br/>ECS Fargate"]
-            Worker["avo-worker task<br/>ECS Fargate<br/>(이후 deprecated)"]
+            Mini["light worker task<br/>ECS Fargate"]
+            Worker["heavy worker task<br/>ECS Fargate<br/>(이후 deprecated)"]
             RDS[(RDS)]
             Redis[(Redis)]
         end
