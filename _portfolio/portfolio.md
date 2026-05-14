@@ -177,7 +177,7 @@ flowchart LR
     Cohort["cohort 선택<br/>환자 N명"] --> API[Django API]
     API -->|"bulk create<br/>진행 상태 관리"| Batch[("Batch + N Jobs")]
     Batch -->|"비동기 동시 실행"| EHR["EHR Data Processor<br/>Lambda"]
-    EHR --> Evaluator["module-evaluator<br/>Lambda"]
+    EHR --> Evaluator["Module Evaluator<br/>Lambda"]
     Evaluator -->|callback| API
     API -.->|상태 갱신| Batch
 ```
@@ -249,11 +249,12 @@ flowchart TB
         end
     end
     ALB --> API
+    API --> MQ
+    MQ --> Mini
+    MQ -.-> Worker
     API --> RDS
     Mini --> RDS
     API --> Redis
-    Mini --> MQ
-    MQ -.-> Worker
     Bastion -.->|SSH 터널| RDS
 ```
 
