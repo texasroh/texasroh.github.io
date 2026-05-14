@@ -31,7 +31,7 @@ Senior Software Engineer
    Batch + N Jobs 진행 상태 관리 + Lambda orchestration / 환자 cohort 일괄 처리
 
 4. **EB → ECS Fargate 마이그레이션**
-   서비스 단위 운영으로 전환 / OIDC keyless CI/CD 파이프라인 간략 소개
+   서비스 단위 운영으로 전환 / 자동 CI/CD 파이프라인 구축
 
 ### 부록
 
@@ -259,9 +259,7 @@ flowchart TB
 
 **CI/CD 파이프라인**
 
-- **OIDC keyless** — GitHub Actions가 AWS 단기 토큰으로 인증, 장기 키 secret 없음.
-- **Matrix 배포 + 자동 롤백** — 서비스 묶음(API · 워커)을 한 워크플로우에서 병렬 배포, 실패 시 이전 task definition으로 자동 복원.
-- **Bastion 동적 SG ingress → revoke** — 운영 작업 시 DB 접근 권한이 일회성으로 열렸다가 자동으로 닫힘.
+- GitHub Actions 기반 자동 빌드·배포·롤백 파이프라인 구축.
 
 ### 4.3 성과 및 인사이트
 
