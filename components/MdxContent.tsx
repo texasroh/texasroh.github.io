@@ -1,6 +1,7 @@
 import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
+import { Mermaid } from './Mermaid'
 
 function Callout({ children, title }: { children: ReactNode; title?: string }) {
   return (
@@ -28,6 +29,17 @@ const components = {
   a: Link,
   Callout,
   Note: Callout,
+  Mermaid,
+}
+
+function preprocessMermaidBlocks(source: string): string {
+  return source.replace(/```mermaid\n([\s\S]+?)\n```/g, (_match, code) => {
+    const escaped = code
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"')
+      .replace(/\n/g, '\\n')
+    return `<Mermaid code={"${escaped}"} />`
+  })
 }
 
 export async function MdxContent({
@@ -41,10 +53,12 @@ export async function MdxContent({
     return null
   }
 
+  const processed = preprocessMermaidBlocks(source)
+
   return (
     <div className={className}>
       <MDXRemote
-        source={source}
+        source={processed}
         components={components}
         options={{
           mdxOptions: {

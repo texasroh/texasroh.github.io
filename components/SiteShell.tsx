@@ -35,7 +35,7 @@ export function SiteShell({
           </Link>
 
           <nav className="flex items-center gap-1 text-sm sm:gap-2">
-            {section === 'resume' ? (
+            {section === 'resume' || section === 'portfolio' ? (
               <>
                 <NavLink href={`/${lang}/blog/`} active={false}>
                   {t.nav.blog}
@@ -43,6 +43,9 @@ export function SiteShell({
                 <span className="mx-2 h-5 w-px bg-ink-800" />
               </>
             ) : null}
+            <NavLink href={`/${lang}/portfolio/`} active={section === 'portfolio'}>
+              {t.nav.portfolio}
+            </NavLink>
             {/* TODO: re-enable resume nav link later
             <NavLink href={`/${lang}/resume/`} active={section === 'resume'}>
               {t.nav.resume}

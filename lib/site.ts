@@ -10,7 +10,7 @@ export const AUTHOR = {
 export const LANGUAGES = ['ko', 'en'] as const
 export type Language = (typeof LANGUAGES)[number]
 
-export type Section = 'blog' | 'resume'
+export type Section = 'blog' | 'resume' | 'portfolio'
 
 export const DEFAULT_LANGUAGE: Language = 'ko'
 
@@ -23,6 +23,7 @@ export const UI = {
     },
     nav: {
       resume: 'Resume',
+      portfolio: 'Portfolio',
       blog: 'Blog',
       languageToggle: '한국어',
       languageNoTranslation: 'No Korean translation - opens the Korean blog list',
@@ -59,6 +60,7 @@ export const UI = {
     },
     nav: {
       resume: '이력서',
+      portfolio: '포트폴리오',
       blog: '블로그',
       languageToggle: 'English',
       languageNoTranslation: '이 글은 영어 번역이 없어 영어 블로그 목록으로 이동합니다',

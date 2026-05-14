@@ -8,6 +8,7 @@ import { LANGUAGES, isLanguage } from './site'
 const ROOT = process.cwd()
 const POSTS_DIR = path.join(ROOT, '_posts')
 const RESUME_DIR = path.join(ROOT, '_resume')
+const PORTFOLIO_DIR = path.join(ROOT, '_portfolio')
 const CONTENT_EXTENSIONS = new Set(['.md', '.mdx'])
 
 export type ResumeSection = 'intro' | 'experience' | 'other_experience' | 'skills' | 'education'
@@ -248,4 +249,12 @@ export const getResumeContent = cache((lang: Language): ResumeContent => {
     skills: bySection('skills')[0],
     educations: bySection('education'),
   }
+})
+
+export const getPortfolioSource = cache((): string => {
+  const filePath = path.join(PORTFOLIO_DIR, 'portfolio.md')
+  if (!fs.existsSync(filePath)) {
+    return ''
+  }
+  return fs.readFileSync(filePath, 'utf8')
 })
