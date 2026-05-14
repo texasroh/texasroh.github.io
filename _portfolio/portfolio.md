@@ -1,4 +1,4 @@
-# 노준혁 Portfolio
+# 노준혁 포트폴리오
 
 Senior Software Engineer
 
@@ -23,7 +23,7 @@ Senior Software Engineer
    멀티 프로바이더 추상화 + 서비스별 fallback /
    Prompt 보안 V1→V2 + diff 모니터링
 
-2. **비동기 작업 인프라 — Celery + ML 워커로 CPU 무거운 작업 분리**
+2. **비동기 작업 인프라 — Celery + ML 워커**
    `avo-worker` + `avo-miniworker` 두 형제 워커 구조 / RabbitMQ + ECS Fargate / Whisper 음성→텍스트 파이프라인
 
 3. **환자 cohort 평가 — 백엔드 Module Evaluator + 자동 비동기 다중 실행**
@@ -95,7 +95,7 @@ flowchart TB
     subgraph V2 ["V2 (In progress)"]
         direction LR
         C2[Client] -->|모듈 식별자 +<br/>변수| BE2[Backend]
-        BE2 -->|발행 시점 스냅샷 조회<br/>then 백엔드에서 prompt 조립| LLM2[(LLM)]
+        BE2 -->|발행 시점 스냅샷 조회<br/>→ 백엔드에서 prompt 조립| LLM2[(LLM)]
     end
 ```
 
@@ -106,11 +106,11 @@ flowchart TB
 
 - 매 요청마다 V1·V2 prompt를 둘 다 빌드 → diff 로깅.
 - 모니터링 실패가 production을 막지 않는 **fail-open** 구조.
-- 점진 트래픽 분배 + diff 모니터링으로 incident 없이 전환 완료.
+- 점진 트래픽 분배 + diff 모니터링 진행 중.
 
 ### 1.4 성과 및 인사이트
 
-- **장애 자동 격리** — 한 프로바이더가 죽어도 의료진은 인지하지 못한 채 응답을 받는다.
+- **장애 자동 격리** — 한 프로바이더가 죽어도 의료진이 인지하지 못한 채 응답이 전달됨.
 - **모델 교체 deploy zero** — 새 모델 도입은 DB 레코드 + 트래픽 비율 조정만으로.
 - **자산 노출 면 제거** — V2 이후 prompt 본문이 네트워크 경계를 넘지 않는다.
 - **무중단 회귀 전환** — fail-open diff 모니터링 + 점진 분배로 큰 구조 변경을 incident 없이 진행 중.
@@ -137,13 +137,13 @@ flowchart LR
     ML -->|webhook| API
 ```
 
-- 두 형제 워커로 분리: **ML 워커**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **Django 비동기 워커**(긴 llm api 호출 · 큰 메모리 점유 · 짧은 DB 작업).
-- Celery 설정(task_acks_late + reject_on_worker_lost)으로 워커가 죽거나 재시작해도 메시지는 다른 워커로 재배달 (at-least-once).
+- 두 형제 워커로 분리: **ML 워커**(별도 레포 · 큰 의존성 · 무거운 컨테이너)와 **Django 비동기 워커**(긴 llm api 호출 · 메모리 부담 큼 · 짧은 DB 작업).
+- 워커 장애 복원 설정으로 워커가 죽거나 재시작해도 메시지는 다른 워커로 재배달 (at-least-once).
 - AI Scribe 음성 처리는 긴 오디오를 청크 분할 + 병렬 Whisper 호출로 흡수, Whisper API도 멀티 프로바이더 폴백 적용. (관련: [[1. 프로덕션 LLM 플랫폼]])
 
 ### 2.3 성과 및 인사이트
 
-- **API 응답 시간 안정** — 무거운 작업이 워커 티어에 격리되어 API는 사용자 요청 외에는 묶이지 않음.
+- **API 응답 시간 안정** — 무거운 작업이 워커 티어에 격리되어 API는 사용자 요청 처리에만 집중.
 - **장애 격리** — ML 의존성 폭주가 Django API에 전파되지 않음. 워커 단위 독립 스케일링.
 - **작업 유실 0** — 워커가 죽거나 재시작해도 메시지가 다른 워커로 재배달.
 
@@ -158,7 +158,7 @@ flowchart LR
 
 - 기존: 의료진이 환자 **한 명씩 수기로** 모듈에 입력하고 결과 확인.
 - 임상 모듈은 프론트엔드(JS)에서만 돌아감 → 자동화·일괄 처리 불가능.
-- 신규 요구: Epic cohort(예: 당뇨 환자 50명) 선택 → 백엔드가 EHR 데이터를 가져와 **N명을 자동으로 동시 평가**.
+- 신규 요구: EHR 시스템에서 cohort 선택 (예: 당뇨 환자 50명) → 백엔드가 EHR 데이터를 가져와 **N명을 자동으로 동시 평가**.
 - 해결할 두 문제: (1) 모듈을 **백엔드에서 동일 결과**로 돌리는 엔진 (2) **cohort 단위 비동기 다중 실행** orchestration.
 
 ### 3.2 상세 내용
@@ -166,9 +166,9 @@ flowchart LR
 **Module Evaluator — 클라이언트 의존 없이 백엔드에서 평가**
 
 - 모듈 정의(JSON 트리)를 Python으로 평가하는 엔진 신규 구축.
-- 카드 변수, 트리거 체인, 중첩 조건부 문구, EHR mention parsing 등 모든 노드 타입을 재현.
+- 카드 변수, 트리거 체인, 중첩 조건부 문구, EHR 데이터 참조 노드 처리 등 모든 노드 타입을 재현.
 - 프론트엔드(JS) 평가 결과와 **완전히 동일** — 빌더 미리보기와 실제 환자 결과가 갈라지면 의료 안전 사고로 직결.
-- 같은 데이터 변환 자산을 [[1. 프로덕션 LLM 플랫폼]]의 V2 prompt 조립과 공유.
+- 같은 모듈 트리 → 텍스트 변환 자산을 [[1. 프로덕션 LLM 플랫폼]]의 V2 prompt 조립과 공유.
 
 **핵심 흐름 — 자동 비동기 다중 평가**
 
@@ -205,7 +205,7 @@ flowchart LR
 
 - **확장성**: API와 워커는 부하 곡선이 다른데 EB는 묶음 스케일만 가능 → 워커 티어 분리([[2. 비동기 작업 인프라]])의 전제 조건.
 - **일관성**: 환경 구성이 콘솔에 묻혀 IaC와 분리, 컨테이너 단위 재현·롤백이 어려움.
-- **보안성**: EB는 워크로드가 **public subnet에 노출** → 외부 접근 면 큼. 내부 자원 접근에도 정적 ingress 의존. **환자 데이터(PHI)를 다루는 도메인에서 노출 면 최소화는 컴플라이언스 요구**.
+- **보안성**: EB는 워크로드가 **public subnet에 노출** → 외부 접근 면 큼. 내부 자원 접근에도 정적 ingress 의존. **환자 데이터(PHI, 개인 의료 정보)를 다루는 도메인에서 노출 면 최소화는 컴플라이언스 요구**.
 
 ### 4.2 Before / After
 
@@ -263,7 +263,7 @@ flowchart TB
 
 ### 4.3 성과 및 인사이트
 
-- **확장성 · 워크로드별 독립 스케일** — API와 워커가 각각 task definition으로 분리되어 워크로드 특성에 맞게 독립 스케일·운영. 워커 티어 분리([[2. 비동기 작업 인프라]])의 기반. Datadog 사이드카로 서비스별 신호 분리.
+- **확장성 · 워크로드별 독립 스케일** — API와 워커가 각각 task definition으로 분리되어 워크로드 특성에 맞게 독립 스케일·운영. 워커 티어 분리([[2. 비동기 작업 인프라]])의 기반.
 - **일관성 · Immutable Infrastructure** — Task definition + 컨테이너 이미지 태그로 어디서 돌든 동일하게 배포·롤백.
 - **보안성 · Private Subnet 격리 + Zero Standing Access** — 워크로드를 **Private Subnet**으로 이동해 외부 노출 면 제거. Bastion 동적 SG(ingress → revoke)로 관리 접근도 평시 권한 0.
 
@@ -273,7 +273,7 @@ flowchart TB
 
 | 영역                              | 내용                                                                                                                                |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Auth — Firebase + Django 통합** | Firebase OAuth → Django 사용자 매핑, OAuth 사용자 마이그레이션, duplicate email 처리, token check-revoke 제거로 인증 pool 비용 절감 |
+| **Auth — Firebase + Django 통합** | Firebase OAuth → Django 매핑, OAuth 마이그레이션, duplicate email 처리                                                              |
 | **N+1 해결**                      | 메인 페이지, 관리자 화면 등 hot path의 N+1 쿼리 제거                                                                                |
 | **인덱싱 · 쿼리 최적화**          | 복합/단일 인덱스 추가, prefetch + only/defer 조합으로 응답 시간 단축                                                                |
 | **검색**                          | Fuzzy search 개선, publish history 백필의 race condition 처리                                                                       |
