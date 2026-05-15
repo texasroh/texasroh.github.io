@@ -10,9 +10,30 @@ function loadMermaid() {
       const mermaid = mod.default
       mermaid.initialize({
         startOnLoad: false,
-        theme: 'default',
+        theme: 'base',
         securityLevel: 'loose',
         fontFamily: 'inherit',
+        themeVariables: {
+          darkMode: true,
+          background: '#18181b',
+          primaryColor: '#27272a',
+          primaryTextColor: '#f4f4f5',
+          primaryBorderColor: '#52525b',
+          secondaryColor: '#1f1f23',
+          secondaryTextColor: '#e4e4e7',
+          secondaryBorderColor: '#3f3f46',
+          tertiaryColor: '#27272a',
+          tertiaryTextColor: '#e4e4e7',
+          tertiaryBorderColor: '#3f3f46',
+          lineColor: '#a1a1aa',
+          textColor: '#e4e4e7',
+          mainBkg: '#27272a',
+          clusterBkg: '#1f1f23',
+          clusterBorder: '#3f3f46',
+          edgeLabelBackground: '#27272a',
+          labelTextColor: '#e4e4e7',
+          nodeBorder: '#52525b',
+        },
       })
       return mermaid
     })

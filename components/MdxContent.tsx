@@ -1,4 +1,10 @@
-import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
+import type {
+  AnchorHTMLAttributes,
+  HTMLAttributes,
+  ReactElement,
+  ReactNode,
+} from 'react'
+import { isValidElement } from 'react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import { Mermaid } from './Mermaid'
@@ -25,21 +31,31 @@ function Link(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
   )
 }
 
-const components = {
-  a: Link,
-  Callout,
-  Note: Callout,
-  Mermaid,
+function extractMermaidSource(children: ReactNode): string | null {
+  if (!isValidElement(children)) return null
+  const child = children as ReactElement<{ className?: string; children?: ReactNode }>
+  if (child.type !== 'code') return null
+  const className = child.props.className ?? ''
+  if (!/(^|\s)language-mermaid(\s|$)/.test(className)) return null
+  const inner = child.props.children
+  if (typeof inner === 'string') return inner.replace(/\n$/, '')
+  if (Array.isArray(inner)) return inner.filter((c) => typeof c === 'string').join('')
+  return null
 }
 
-function preprocessMermaidBlocks(source: string): string {
-  return source.replace(/```mermaid\n([\s\S]+?)\n```/g, (_match, code) => {
-    const escaped = code
-      .replace(/\\/g, '\\\\')
-      .replace(/"/g, '\\"')
-      .replace(/\n/g, '\\n')
-    return `<Mermaid code={"${escaped}"} />`
-  })
+function Pre(props: HTMLAttributes<HTMLPreElement>) {
+  const mermaidSource = extractMermaidSource(props.children)
+  if (mermaidSource) {
+    return <Mermaid code={mermaidSource} />
+  }
+  return <pre {...props} />
+}
+
+const components = {
+  a: Link,
+  pre: Pre,
+  Callout,
+  Note: Callout,
 }
 
 export async function MdxContent({
@@ -53,12 +69,10 @@ export async function MdxContent({
     return null
   }
 
-  const processed = preprocessMermaidBlocks(source)
-
   return (
     <div className={className}>
       <MDXRemote
-        source={processed}
+        source={source}
         components={components}
         options={{
           mdxOptions: {
