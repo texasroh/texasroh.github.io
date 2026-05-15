@@ -1,6 +1,13 @@
-import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
+import type {
+  AnchorHTMLAttributes,
+  HTMLAttributes,
+  ReactElement,
+  ReactNode,
+} from 'react'
+import { isValidElement } from 'react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
+import { Mermaid } from './Mermaid'
 
 function Callout({ children, title }: { children: ReactNode; title?: string }) {
   return (
@@ -24,8 +31,29 @@ function Link(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
   )
 }
 
+function extractMermaidSource(children: ReactNode): string | null {
+  if (!isValidElement(children)) return null
+  const child = children as ReactElement<{ className?: string; children?: ReactNode }>
+  if (child.type !== 'code') return null
+  const className = child.props.className ?? ''
+  if (!/(^|\s)language-mermaid(\s|$)/.test(className)) return null
+  const inner = child.props.children
+  if (typeof inner === 'string') return inner.replace(/\n$/, '')
+  if (Array.isArray(inner)) return inner.filter((c) => typeof c === 'string').join('')
+  return null
+}
+
+function Pre(props: HTMLAttributes<HTMLPreElement>) {
+  const mermaidSource = extractMermaidSource(props.children)
+  if (mermaidSource) {
+    return <Mermaid code={mermaidSource} />
+  }
+  return <pre {...props} />
+}
+
 const components = {
   a: Link,
+  pre: Pre,
   Callout,
   Note: Callout,
 }
