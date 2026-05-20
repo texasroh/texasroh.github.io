@@ -1,12 +1,12 @@
 import type {
   AnchorHTMLAttributes,
   HTMLAttributes,
-  ReactElement,
   ReactNode,
 } from 'react'
-import { isValidElement } from 'react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
+import rehypeShiki from '@shikijs/rehype'
+import type { ShikiTransformer } from 'shiki'
 import { Mermaid } from './Mermaid'
 
 function Callout({ children, title }: { children: ReactNode; title?: string }) {
@@ -31,29 +31,62 @@ function Link(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
   )
 }
 
-function extractMermaidSource(children: ReactNode): string | null {
-  if (!isValidElement(children)) return null
-  const child = children as ReactElement<{ className?: string; children?: ReactNode }>
-  if (child.type !== 'code') return null
-  const className = child.props.className ?? ''
-  if (!/(^|\s)language-mermaid(\s|$)/.test(className)) return null
-  const inner = child.props.children
-  if (typeof inner === 'string') return inner.replace(/\n$/, '')
-  if (Array.isArray(inner)) return inner.filter((c) => typeof c === 'string').join('')
-  return null
+// Convert ```mermaid fences into <Mermaid code="..." /> JSX before Shiki sees them,
+// so the diagram source isn't tokenized into syntax-highlighted spans.
+function remarkMermaid() {
+  return (tree: { children?: unknown[] }) => {
+    const walk = (parent: { children?: unknown[] }) => {
+      const children = parent.children
+      if (!Array.isArray(children)) return
+      for (let i = 0; i < children.length; i++) {
+        const node = children[i] as {
+          type?: string
+          lang?: string
+          value?: string
+          children?: unknown[]
+        }
+        if (node?.type === 'code' && node.lang === 'mermaid') {
+          children[i] = {
+            type: 'mdxJsxFlowElement',
+            name: 'Mermaid',
+            attributes: [
+              { type: 'mdxJsxAttribute', name: 'code', value: node.value ?? '' },
+            ],
+            children: [],
+          }
+        } else {
+          walk(node as { children?: unknown[] })
+        }
+      }
+    }
+    walk(tree)
+  }
 }
 
-function Pre(props: HTMLAttributes<HTMLPreElement>) {
-  const mermaidSource = extractMermaidSource(props.children)
-  if (mermaidSource) {
-    return <Mermaid code={mermaidSource} />
-  }
-  return <pre {...props} />
+// Drop the inline background-color Shiki writes on <pre> and <code> so our
+// existing .prose-post pre styling (zinc-950 bg, border, padding) wins.
+const stripShikiBackground: ShikiTransformer = {
+  pre(node) {
+    const style = node.properties?.style
+    if (typeof style === 'string') {
+      const stripped = style.replace(/background-color\s*:[^;]+;?/g, '').trim()
+      if (stripped) node.properties.style = stripped
+      else delete node.properties.style
+    }
+  },
+  code(node) {
+    const style = node.properties?.style
+    if (typeof style === 'string') {
+      const stripped = style.replace(/background-color\s*:[^;]+;?/g, '').trim()
+      if (stripped) node.properties.style = stripped
+      else delete node.properties.style
+    }
+  },
 }
 
 const components = {
   a: Link,
-  pre: Pre,
+  Mermaid,
   Callout,
   Note: Callout,
 }
@@ -76,7 +109,16 @@ export async function MdxContent({
         components={components}
         options={{
           mdxOptions: {
-            remarkPlugins: [remarkGfm],
+            remarkPlugins: [remarkGfm, remarkMermaid],
+            rehypePlugins: [
+              [
+                rehypeShiki,
+                {
+                  theme: 'github-dark-dimmed',
+                  transformers: [stripShikiBackground],
+                },
+              ],
+            ],
           },
         }}
       />
