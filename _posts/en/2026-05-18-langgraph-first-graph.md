@@ -1,5 +1,5 @@
 ---
-title: "Your First LangGraph: Only Where LCEL Falls Short"
+title: "LangGraph Part 1 — Your First Graph: Only Where LCEL Falls Short"
 date: 2026-05-18
 lang: en
 tags: [langgraph, langchain, llm, python]
@@ -7,6 +7,10 @@ description: "LangGraph isn't an upgrade from LCEL. For straight chains LCEL sta
 ---
 
 **LangGraph isn't an upgrade from LCEL.** For chain-shaped work, LCEL stays shorter. LangGraph starts earning its keep the moment **cycles / fan-in joins / shared state** enter the picture. This post marks that boundary with the smallest graph I can write.
+
+> **LangGraph Series**
+> 1. **Your First Graph — Only Where LCEL Falls Short** ← this post
+> 2. [State Design — Schema and Merge Rule](/en/blog/langgraph-state-design/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`.
 
