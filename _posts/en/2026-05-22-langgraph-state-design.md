@@ -11,6 +11,8 @@ description: "Two decisions go into LangGraph state design — the schema (Typed
 > **LangGraph Series**
 > 1. [Your First Graph — Only Where LCEL Falls Short](/en/blog/langgraph-first-graph/)
 > 2. **State Design — Schema and Merge Rule** ← this post
+> 3. [Send — Dynamic Branching Edges Can't Draw](/en/blog/langgraph-send/)
+> 4. An Interrupt Doesn't Pause the Graph
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. Pydantic v2.
 
@@ -224,4 +226,4 @@ Centralizing the merge logic means every node just returns its partial, and the 
 
 State design comes down to two decisions — the schema, and the merge rule. **The schema decides *the shape of each cell*; the reducer decides *what happens when the same cell is filled at the same time*.** Hold onto the default and the exception cases for each, and state design stays simple.
 
-Next post: control flow — the `Send` API, cycles, and interrupt patterns.
+Next up: control flow — [dynamic fan-out with `Send`](/en/blog/langgraph-send/).
