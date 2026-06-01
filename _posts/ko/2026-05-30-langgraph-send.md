@@ -13,7 +13,7 @@ description: "그래프의 edge는 plain이든 conditional이든 갈 수 있는 
 > 1. [첫 그래프 — LCEL로 안 풀리는 것만 그래프로](/ko/blog/langgraph-first-graph/)
 > 2. [State 설계 — 스키마와 머지 규칙](/ko/blog/langgraph-state-design/)
 > 3. **Send — edge로 못 그리는 동적 fan-out** ← 현재 글
-> 4. 인터럽트 — 그래프를 멈추는 게 아니다
+> 4. [인터럽트 — 그래프를 멈추는 게 아니다](/ko/blog/langgraph-human-in-the-loop/)
 
 > 버전: `langgraph >= 0.2, < 0.3` 기준.
 

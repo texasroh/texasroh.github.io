@@ -13,7 +13,7 @@ description: "A graph's edges — plain or conditional — are static branches: 
 > 1. [Your First Graph — Only Where LCEL Falls Short](/en/blog/langgraph-first-graph/)
 > 2. [State Design — Schema and Merge Rule](/en/blog/langgraph-state-design/)
 > 3. **Send — Dynamic Fan-out Edges Can't Draw** ← this post
-> 4. An Interrupt Doesn't Pause the Graph
+> 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`.
 
