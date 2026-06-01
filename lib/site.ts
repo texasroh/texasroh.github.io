@@ -47,6 +47,7 @@ export const UI = {
       noPosts: 'No posts yet.',
       backToList: '<- Back to list',
       readingTime: 'min read',
+      views: 'views',
     },
     footer: {
       copyright: '© 2026 Junhyeok Roh',
@@ -84,6 +85,7 @@ export const UI = {
       noPosts: '아직 작성된 글이 없습니다.',
       backToList: '<- 목록으로 돌아가기',
       readingTime: '분 분량',
+      views: '조회',
     },
     footer: {
       copyright: '© 2026 Junhyeok Roh',

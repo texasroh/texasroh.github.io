@@ -32,6 +32,15 @@ jobs:
 
       - name: Build Next.js site
         run: npm run build
+        env:
+          # Firebase web config is public (governed by Firestore rules), so these
+          # live in repo Variables, not Secrets: Settings -> Secrets and variables
+          # -> Actions -> Variables.
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ vars.NEXT_PUBLIC_FIREBASE_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ vars.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_APP_ID }}
+          NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

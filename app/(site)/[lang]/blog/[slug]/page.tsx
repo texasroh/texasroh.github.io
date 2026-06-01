@@ -5,6 +5,7 @@ import { getAllPosts, getPostBySlug, getPostTranslation } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { MdxContent } from '@/components/MdxContent'
 import { SiteShell } from '@/components/SiteShell'
+import { ViewCount } from '@/components/ViewCount'
 import { UI, absoluteUrl, isLanguage, otherLanguage } from '@/lib/site'
 
 type PageProps = {
@@ -103,6 +104,7 @@ export default async function PostPage({ params }: PageProps) {
             <span>
               · {post.readingMinutes} {t.blog.readingTime}
             </span>
+            <ViewCount slug={post.slug} label={t.blog.views} track className="before:content-['·_']" />
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.15] tracking-tight text-ink-50 sm:text-5xl">
             {post.title}

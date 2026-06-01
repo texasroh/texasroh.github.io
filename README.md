@@ -80,6 +80,41 @@ tech_stack: [Django, React, AWS]
 - Bullet point 2
 ```
 
+## Post View Counter
+
+Each post tracks views via a Firebase Firestore document (`views/{slug}`, shared
+across the ko/en translations). It runs entirely client-side on the free Spark
+plan — no billing account required.
+
+One-time setup:
+
+1. Create a Firebase project and enable **Firestore Database** (production mode).
+2. Firestore -> **Rules**: paste the contents of [`firestore.rules`](firestore.rules)
+   and publish. They allow reading counts and incrementing by exactly 1 — nothing else.
+3. Project settings -> **Your apps** -> register a Web app, copy the config.
+4. Local dev: `cp .env.local.example .env.local` and fill in the four
+   `NEXT_PUBLIC_FIREBASE_*` values.
+5. CI: add the same four as repo **Variables** (Settings -> Secrets and variables
+   -> Actions -> Variables). They are public values, not secrets.
+
+Without these env vars the counter silently no-ops, so the site still builds and
+runs locally. The first visit to a post (per browser session) increments the count.
+
+## Analytics (GA4)
+
+Page analytics run through Firebase Analytics on the same project, initialized
+client-side in [`components/Analytics.tsx`](components/Analytics.tsx). To enable:
+
+1. Firebase console -> Project settings -> **Integrations** -> enable **Google Analytics**
+   (creates a linked GA4 property).
+2. Project settings -> **Your apps** -> the web app config now includes a
+   `measurementId` (`G-XXXXXXX`).
+3. Add it as `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID` in `.env.local` and as a repo
+   Variable for CI.
+
+It stays off until that id is set. GA4 enhanced measurement (on by default)
+tracks client-side route changes, so no per-page wiring is needed.
+
 ## Structure
 
 ```text

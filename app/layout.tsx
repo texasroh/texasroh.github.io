@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Inter, JetBrains_Mono, Noto_Sans_KR } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@/components/Analytics'
 import { DEFAULT_LANGUAGE, SITE_URL, UI } from '@/lib/site'
 
 const inter = Inter({
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   )

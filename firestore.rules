@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// View counter for blog posts. Anyone may read counts and increment a post's
+// counter by exactly 1 — nothing else is writable. Paste these rules into the
+// Firebase console: Firestore Database -> Rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /views/{slug} {
+      allow read: if true;
+
+      // First view of a post creates the doc at 1.
+      allow create: if request.resource.data.keys().hasOnly(['count'])
+                    && request.resource.data.count == 1;
+
+      // Subsequent views may only bump the count by 1 (increment(1)).
+      allow update: if request.resource.data.keys().hasOnly(['count'])
+                    && request.resource.data.count == resource.data.count + 1;
+
+      allow delete: if false;
+    }
+  }
+}

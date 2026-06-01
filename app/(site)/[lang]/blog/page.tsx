@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getPostsByLanguage } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { SiteShell } from '@/components/SiteShell'
+import { ViewCount, ViewCountsProvider } from '@/components/ViewCount'
 import { UI, absoluteUrl, isLanguage, otherLanguage } from '@/lib/site'
 
 type PageProps = {
@@ -60,6 +61,7 @@ export default async function BlogPage({ params }: PageProps) {
         {posts.length === 0 ? (
           <p className="py-20 text-center text-ink-500">{t.blog.noPosts}</p>
         ) : (
+          <ViewCountsProvider>
           <div className="space-y-10">
             {posts.map((post) => (
               <article key={post.id} className="group">
@@ -75,6 +77,7 @@ export default async function BlogPage({ params }: PageProps) {
                         ))}
                       </div>
                     ) : null}
+                    <ViewCount slug={post.slug} label={t.blog.views} />
                   </div>
                   <h2 className="mb-2 text-2xl font-bold tracking-tight text-ink-50 transition-colors group-hover:text-accent sm:text-3xl">
                     {post.title}
@@ -84,6 +87,7 @@ export default async function BlogPage({ params }: PageProps) {
               </article>
             ))}
           </div>
+          </ViewCountsProvider>
         )}
       </article>
     </SiteShell>
