@@ -97,8 +97,10 @@ One-time setup:
 5. CI: add the same four as repo **Variables** (Settings -> Secrets and variables
    -> Actions -> Variables). They are public values, not secrets.
 
-Without these env vars the counter silently no-ops, so the site still builds and
-runs locally. The first visit to a post (per browser session) increments the count.
+The first visit to a post (per browser session) increments the count. The counter
+is **disabled in development** (`next dev`) and when the env vars are missing, so
+local browsing never inflates production counts and the site still builds
+unconfigured. It runs only in the production build.
 
 ## Analytics (GA4)
 
@@ -112,8 +114,9 @@ client-side in [`components/Analytics.tsx`](components/Analytics.tsx). To enable
 3. Add it as `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID` in `.env.local` and as a repo
    Variable for CI.
 
-It stays off until that id is set. GA4 enhanced measurement (on by default)
-tracks client-side route changes, so no per-page wiring is needed.
+It stays off until that id is set, and (like the counter) is disabled in
+development so local runs don't pollute Analytics. GA4 enhanced measurement
+(on by default) tracks client-side route changes, so no per-page wiring is needed.
 
 ## Structure
 

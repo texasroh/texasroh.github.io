@@ -11,9 +11,12 @@ const firebaseConfig = {
 }
 
 // Firebase web config is not secret — access is governed by Firestore rules.
-// When the env vars are missing (e.g. local dev without a project), Firestore
-// and Analytics silently no-op instead of crashing the page.
-export const firebaseEnabled = Boolean(firebaseConfig.apiKey && firebaseConfig.projectId)
+// Disabled in development (`next dev`) so local browsing never inflates the
+// production view counts or pollutes Analytics; the production build keeps it on.
+// Also no-ops when env vars are missing, so unconfigured builds still work.
+const isProduction = process.env.NODE_ENV === 'production'
+export const firebaseEnabled =
+  isProduction && Boolean(firebaseConfig.apiKey && firebaseConfig.projectId)
 
 // Analytics needs a measurementId on top of the base config; it stays off until
 // Google Analytics is enabled on the project and the id is provided.
