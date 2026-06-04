@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Junhyeok Roh',
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
 }
 

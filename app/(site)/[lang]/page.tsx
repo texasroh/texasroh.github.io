@@ -5,7 +5,7 @@ import { isLanguage } from '@/lib/site'
 export const metadata: Metadata = {
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
 }
 
