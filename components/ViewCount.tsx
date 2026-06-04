@@ -100,7 +100,12 @@ export function ViewCount({ slug, label, track = false, className }: ViewCountPr
   // (null while still loading, so we render nothing until it resolves).
   const count = track ? tracked : shared ? (shared.get(slug) ?? 0) : null
 
-  if (count === null) {
+  // View count display is temporarily turned off. Tracking (the increment in
+  // the effect above) keeps running, so counts still accumulate in Firestore.
+  // Flip this to true to show the number again.
+  const SHOW_VIEW_COUNT: boolean = false
+
+  if (!SHOW_VIEW_COUNT || count === null) {
     return null
   }
 
