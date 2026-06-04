@@ -13,6 +13,7 @@ description: "LangGraph isn't an upgrade from LCEL. For straight chains LCEL sta
 > 2. [State Design — Schema and Merge Rule](/en/blog/langgraph-state-design/)
 > 3. [Send — Dynamic Fan-out Edges Can't Draw](/en/blog/langgraph-send/)
 > 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
+> 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`.
 

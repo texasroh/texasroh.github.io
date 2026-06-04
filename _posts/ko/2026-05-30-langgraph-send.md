@@ -14,6 +14,7 @@ description: "그래프의 edge는 plain이든 conditional이든 갈 수 있는 
 > 2. [State 설계 — 스키마와 머지 규칙](/ko/blog/langgraph-state-design/)
 > 3. **Send — edge로 못 그리는 동적 fan-out** ← 현재 글
 > 4. [인터럽트 — 그래프를 멈추는 게 아니다](/ko/blog/langgraph-human-in-the-loop/)
+> 5. [체크포인트는 멈출 때만 찍히는 게 아니다](/ko/blog/langgraph-checkpointer/)
 
 > 버전: `langgraph >= 0.2, < 0.3` 기준.
 
