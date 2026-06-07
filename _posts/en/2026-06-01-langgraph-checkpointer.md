@@ -14,6 +14,7 @@ description: "Part 4's interrupt worked because of the checkpointer. But checkpo
 > 3. [Send — Dynamic Fan-out Edges Can't Draw](/en/blog/langgraph-send/)
 > 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
 > 5. **A Checkpoint Isn't Only for Pausing** ← this post
+> 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. The checkpointer was split into separate packages — `langgraph-checkpoint` (core, `MemorySaver`), `langgraph-checkpoint-sqlite`, `langgraph-checkpoint-postgres`. Import paths shift between versions, so check yours before relying on them.
 

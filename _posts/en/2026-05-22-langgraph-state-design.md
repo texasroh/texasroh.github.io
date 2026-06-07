@@ -14,6 +14,7 @@ description: "Two decisions go into LangGraph state design — the schema (Typed
 > 3. [Send — Dynamic Fan-out Edges Can't Draw](/en/blog/langgraph-send/)
 > 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
+> 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. Pydantic v2.
 

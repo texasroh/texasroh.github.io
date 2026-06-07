@@ -15,6 +15,7 @@ description: "A graph's edges — plain or conditional — are static branches: 
 > 3. **Send — Dynamic Fan-out Edges Can't Draw** ← this post
 > 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
+> 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`.
 
