@@ -13,10 +13,12 @@ Memory that survives *across* conversations is a different kind of thing. LangGr
 > **LangGraph Series**
 > 1. [Your First Graph — Only Where LCEL Falls Short](/en/blog/langgraph-first-graph/)
 > 2. [State Design — Schema and Merge Rule](/en/blog/langgraph-state-design/)
+> 2.5. [MessagesState Isn't a Special State](/en/blog/langgraph-messages-state/)
 > 3. [Send — Dynamic Fan-out Edges Can't Draw](/en/blog/langgraph-send/)
 > 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
 > 6. **The Checkpointer Doesn't Cross Threads** ← this post
+> 7. [create_react_agent Is Not Magic](/en/blog/langgraph-react-agent/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. The Store is split across packages too — `BaseStore`/`InMemoryStore` live in the `langgraph.store.*` core, `PostgresStore` in `langgraph-checkpoint-postgres`. The `index` option for semantic search stabilized relatively recently, so the argument shape changes often between versions. Check yours before relying on it.
 

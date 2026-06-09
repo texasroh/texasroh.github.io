@@ -11,10 +11,12 @@ description: "Part 4's interrupt worked because of the checkpointer. But checkpo
 > **LangGraph Series**
 > 1. [Your First Graph — Only Where LCEL Falls Short](/en/blog/langgraph-first-graph/)
 > 2. [State Design — Schema and Merge Rule](/en/blog/langgraph-state-design/)
+> 2.5. [MessagesState Isn't a Special State](/en/blog/langgraph-messages-state/)
 > 3. [Send — Dynamic Fan-out Edges Can't Draw](/en/blog/langgraph-send/)
 > 4. [An Interrupt Doesn't Pause the Graph](/en/blog/langgraph-human-in-the-loop/)
 > 5. **A Checkpoint Isn't Only for Pausing** ← this post
 > 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
+> 7. [create_react_agent Is Not Magic](/en/blog/langgraph-react-agent/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. The checkpointer was split into separate packages — `langgraph-checkpoint` (core, `MemorySaver`), `langgraph-checkpoint-sqlite`, `langgraph-checkpoint-postgres`. Import paths shift between versions, so check yours before relying on them.
 

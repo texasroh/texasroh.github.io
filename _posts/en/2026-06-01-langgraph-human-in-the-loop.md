@@ -11,10 +11,12 @@ description: "LangGraph's interrupt doesn't hold a running process in memory. It
 > **LangGraph Series**
 > 1. [Your First Graph — Only Where LCEL Falls Short](/en/blog/langgraph-first-graph/)
 > 2. [State Design — Schema and Merge Rule](/en/blog/langgraph-state-design/)
+> 2.5. [MessagesState Isn't a Special State](/en/blog/langgraph-messages-state/)
 > 3. [Send — Dynamic Fan-out Edges Can't Draw](/en/blog/langgraph-send/)
 > 4. **An Interrupt Doesn't Pause the Graph** ← this post
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
 > 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
+> 7. [create_react_agent Is Not Magic](/en/blog/langgraph-react-agent/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. Dynamic `interrupt()` / `Command` landed late in the 0.2 line, so check your minor version before relying on them.
 
