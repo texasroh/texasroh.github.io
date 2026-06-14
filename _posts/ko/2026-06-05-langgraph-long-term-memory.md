@@ -19,6 +19,8 @@ description: "5편의 checkpointer는 '이 대화'를 기억한다. 그런데 th
 > 5. [체크포인트는 멈출 때만 찍히는 게 아니다](/ko/blog/langgraph-checkpointer/)
 > 6. **checkpointer는 스레드를 넘지 못한다** ← 현재 글
 > 7. [create_react_agent는 마법이 아니다](/ko/blog/langgraph-react-agent/)
+> 8. [멀티 에이전트는 에이전트끼리 대화하지 않는다](/ko/blog/langgraph-multi-agent/)
+> 8.5. [subgraph는 state를 공유할 수도, 격리할 수도 있다](/ko/blog/langgraph-subgraph-state/)
 
 > 버전: `langgraph >= 0.2, < 0.3` 기준. Store도 패키지가 갈린다 — `BaseStore`/`InMemoryStore`는 `langgraph.store.*` 코어, `PostgresStore`는 `langgraph-checkpoint-postgres`에 들어간다. semantic search용 `index` 옵션은 비교적 최근에 안정화된 영역이라 버전마다 인자 형태가 자주 바뀐다. 본인 환경에서 확인하고 쓴다.
 

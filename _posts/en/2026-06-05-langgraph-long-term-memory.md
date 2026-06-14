@@ -19,6 +19,8 @@ Memory that survives *across* conversations is a different kind of thing. LangGr
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
 > 6. **The Checkpointer Doesn't Cross Threads** ← this post
 > 7. [create_react_agent Is Not Magic](/en/blog/langgraph-react-agent/)
+> 8. [Multi-Agent Doesn't Mean Agents Talk to Each Other](/en/blog/langgraph-multi-agent/)
+> 8.5. [A Subgraph Can Share State, or Isolate It](/en/blog/langgraph-subgraph-state/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. The Store is split across packages too — `BaseStore`/`InMemoryStore` live in the `langgraph.store.*` core, `PostgresStore` in `langgraph-checkpoint-postgres`. The `index` option for semantic search stabilized relatively recently, so the argument shape changes often between versions. Check yours before relying on it.
 

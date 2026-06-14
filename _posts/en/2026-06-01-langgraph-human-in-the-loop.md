@@ -17,6 +17,8 @@ description: "LangGraph's interrupt doesn't hold a running process in memory. It
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
 > 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
 > 7. [create_react_agent Is Not Magic](/en/blog/langgraph-react-agent/)
+> 8. [Multi-Agent Doesn't Mean Agents Talk to Each Other](/en/blog/langgraph-multi-agent/)
+> 8.5. [A Subgraph Can Share State, or Isolate It](/en/blog/langgraph-subgraph-state/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. Dynamic `interrupt()` / `Command` landed late in the 0.2 line, so check your minor version before relying on them.
 

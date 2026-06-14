@@ -18,6 +18,8 @@ description: "그래프의 edge는 plain이든 conditional이든 갈 수 있는 
 > 5. [체크포인트는 멈출 때만 찍히는 게 아니다](/ko/blog/langgraph-checkpointer/)
 > 6. [checkpointer는 스레드를 넘지 못한다](/ko/blog/langgraph-long-term-memory/)
 > 7. [create_react_agent는 마법이 아니다](/ko/blog/langgraph-react-agent/)
+> 8. [멀티 에이전트는 에이전트끼리 대화하지 않는다](/ko/blog/langgraph-multi-agent/)
+> 8.5. [subgraph는 state를 공유할 수도, 격리할 수도 있다](/ko/blog/langgraph-subgraph-state/)
 
 > 버전: `langgraph >= 0.2, < 0.3` 기준.
 

@@ -17,6 +17,8 @@ description: "We hand-built graphs for six parts, and then an agent is just one 
 > 5. [A Checkpoint Isn't Only for Pausing](/en/blog/langgraph-checkpointer/)
 > 6. [The Checkpointer Doesn't Cross Threads](/en/blog/langgraph-long-term-memory/)
 > 7. **create_react_agent Is Not Magic** ← this post
+> 8. [Multi-Agent Doesn't Mean Agents Talk to Each Other](/en/blog/langgraph-multi-agent/)
+> 8.5. [A Subgraph Can Share State, or Isolate It](/en/blog/langgraph-subgraph-state/)
 
 > Versions: based on `langgraph >= 0.2, < 0.3`. `create_react_agent` lives in `langgraph.prebuilt`, and this area changes argument names often between versions — the system-prompt injection argument alone has gone `messages_modifier` → `state_modifier` → `prompt`. Check the signature in your own environment.
 
@@ -184,4 +186,4 @@ The line in one sentence: **prebuilt gives you the "tool loop" for free, but it 
 
 `create_react_agent` is not magic. Unfold it with `.get_graph()` and you see, right there, the cycle and conditional branch from Parts 1 and 3, the reducer from Part 2, and the checkpointer from Parts 4 and 5. **That's why prebuilt becomes debuggable once you use it after understanding the foundation** — if the loop won't stop, you look at `recursion_limit`; if tool results aren't coming in, at ToolMessage and the reducer; if the conversation doesn't carry over, at `thread_id`. Start from one line without knowing the foundation and that line is a black box — but we've already had our hands all over its insides.
 
-In Part 8 we wire *several* of these agents together. If one agent is a node, how do you bundle multiple agents into one graph (Supervisor / Swarm), and how do you pass state on a handoff — that's where Part 6's long-term memory comes back into play.
+In [Part 8](/en/blog/langgraph-multi-agent/) we wire *several* of these agents together. If one agent is a node, how do you bundle multiple agents into one graph (Supervisor / Swarm), and how do you pass state on a handoff — that's where Part 6's long-term memory comes back into play.
