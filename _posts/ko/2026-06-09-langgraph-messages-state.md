@@ -3,6 +3,8 @@ title: "LangGraph 2.5편 — MessagesState는 특별한 state가 아니다"
 date: 2026-06-09
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 2.5
 description: "2편에서 reducer를 일반론으로 배웠다. 그런데 agent 코드만 보면 갑자기 MessagesState, add_messages, last.tool_calls가 당연한 듯 나온다. messages는 새로운 타입이 아니라 2편의 reducer를 '메시지 객체 리스트'에 적용한 한 가지 패턴일 뿐이다. 메시지가 str이 아니라 객체라는 것, add_messages가 실제로 하는 일, MessagesState가 강제 키가 아니라는 것, 그리고 노드가 메시지를 반환하는 규약까지 — agent로 올라가기 전에 깔아둔다."
 ---
 

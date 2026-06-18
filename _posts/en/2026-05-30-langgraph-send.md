@@ -3,6 +3,8 @@ title: "LangGraph Part 3 — Send: Dynamic Fan-out Edges Can't Draw"
 date: 2026-05-30
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 3
 description: "A graph's edges — plain or conditional — are static branches: the set of reachable nodes is fixed at build time. When the number of fan-out branches is a runtime value, static edges can't draw it. That's Send — the tool for putting real map-reduce into an LLM workflow."
 ---
 

@@ -3,6 +3,8 @@ title: "LangGraph Part 5 — A Checkpoint Isn't Only for Pausing"
 date: 2026-06-01
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 5
 description: "Part 4's interrupt worked because of the checkpointer. But checkpoints aren't only written when you pause — one is written at every superstep. The checkpointer isn't a 'tool for waiting on humans'; it's the persistence layer under the whole graph run. Memory/Sqlite/Postgres are the same interface, different durability."
 ---
 

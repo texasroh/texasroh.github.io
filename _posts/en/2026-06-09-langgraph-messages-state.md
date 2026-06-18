@@ -3,6 +3,8 @@ title: "LangGraph Part 2.5 — MessagesState Isn't a Special State"
 date: 2026-06-09
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 2.5
 description: "Part 2 taught reducers in the abstract. But open any agent code and suddenly MessagesState, add_messages, and last.tool_calls show up as if they were obvious. messages isn't a new type — it's Part 2's reducer applied to one particular data shape: a list of message objects. That messages are objects rather than strings, what add_messages actually does, why MessagesState is not a mandatory key, and the convention for how a node returns messages — laid down before we climb up to agents."
 ---
 

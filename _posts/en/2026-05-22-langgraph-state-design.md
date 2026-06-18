@@ -3,6 +3,8 @@ title: "LangGraph Part 2 — State Design: Schema and Merge Rule"
 date: 2026-05-22
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 2
 description: "Two decisions go into LangGraph state design — the schema (TypedDict vs Pydantic), and the rule for merging when multiple nodes fill the same key (Reducer). This post lays out how to make each. Default: TypedDict with no reducer."
 ---
 

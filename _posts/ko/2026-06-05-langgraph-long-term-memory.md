@@ -3,6 +3,8 @@ title: "LangGraph 6편 — checkpointer는 스레드를 넘지 못한다"
 date: 2026-06-05
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 6
 description: "5편의 checkpointer는 '이 대화'를 기억한다. 그런데 thread_id가 바뀌면 그 기억은 통째로 사라진다. 사용자를 가로질러 남는 기억은 checkpointer가 아니라 Store다. short-term(thread)과 long-term(cross-thread)은 같은 축이 아니다 — Store 인터페이스, namespace, semantic search, 그리고 PHI가 영구히 검색 가능해진다는 문제까지."
 ---
 

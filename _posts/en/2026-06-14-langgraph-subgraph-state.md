@@ -3,6 +3,8 @@ title: "LangGraph Part 8.5 — A Subgraph Can Share State, or Isolate It"
 date: 2026-06-14
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 8.5
 description: "Part 8 said that dropping an agent in as a node makes the two share the same messages. But that sharing isn't magic — it's a choice. Whether a subgraph exchanges state with the outer graph comes down to one thing: whether they share a key by name. Drop a compiled graph straight in as a node and the parent's reducer merges the shared key automatically; wrap it in a function and you control exactly what goes in and what comes out. Multi-agent context pollution, and the isolation that prevents it, are both explained by this one thing."
 ---
 

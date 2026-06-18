@@ -3,6 +3,8 @@ title: "LangGraph 4편 — 인터럽트는 그래프를 멈추는 게 아니다"
 date: 2026-06-01
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 4
 description: "LangGraph의 interrupt는 실행 중인 프로세스를 메모리에 붙잡아두는 게 아니다. 현재 state를 체크포인트에 저장하고 그래프를 빠져나간다. 재개 = 같은 thread로 다시 진입. 그래서 checkpointer가 없으면 interrupt도 없다."
 ---
 

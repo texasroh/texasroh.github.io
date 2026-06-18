@@ -3,6 +3,8 @@ title: "LangGraph 7편 — create_react_agent는 마법이 아니다"
 date: 2026-06-07
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 7
 description: "1~6편을 손으로 그래프를 짰는데, agent는 create_react_agent 한 줄이면 끝난다. 그럼 그동안 짠 건 뭐였나. 답: 그 한 줄 안에 우리가 짠 그래프가 그대로 들어있다. prebuilt agent를 그래프로 펼쳐서 agent/tools 루프를 까보고, ToolNode가 reducer 위에서 뭘 하는지, checkpointer를 어떻게 그대로 얹는지, 그리고 어디까지 prebuilt로 충분하고 어디서 직접 그래프로 내려가야 하는지 경계선을 긋는다."
 ---
 

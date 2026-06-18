@@ -3,6 +3,8 @@ title: "LangGraph Part 8 — Multi-Agent Doesn't Mean Agents Talk to Each Other"
 date: 2026-06-09
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 8
 description: "Say 'multi-agent' and people picture a distributed system of agents passing messages around. LangGraph doesn't work that way — it's still one graph, the agents are nodes inside it, and they don't communicate; they hand off control and share state. The tool for that handoff is a single Command. We hand-build a handoff to take it apart, show that Supervisor and Swarm are just topology variants of the same mechanism, and draw the line on what to pass at a handoff and what not to."
 ---
 

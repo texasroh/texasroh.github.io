@@ -3,6 +3,8 @@ title: "LangGraph Part 4 — An Interrupt Doesn't Pause the Graph"
 date: 2026-06-01
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 4
 description: "LangGraph's interrupt doesn't hold a running process in memory. It saves the current state to a checkpoint and exits the graph. Resuming = re-entering with the same thread. So no checkpointer, no interrupt."
 ---
 

@@ -3,6 +3,8 @@ title: "LangGraph Part 7 — create_react_agent Is Not Magic"
 date: 2026-06-07
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 7
 description: "We hand-built graphs for six parts, and then an agent is just one line of create_react_agent. So what was all that work for? Answer: that one line contains the very graph we built. Unfold the prebuilt agent into a graph to inspect the agent/tools loop, see what ToolNode does on top of a reducer, how the checkpointer drops in unchanged, and draw the line between where prebuilt is enough and where you need to drop down to a hand-built graph."
 ---
 

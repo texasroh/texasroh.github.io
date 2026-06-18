@@ -3,6 +3,8 @@ title: "LangGraph 2편 — State 설계: 스키마와 머지 규칙"
 date: 2026-05-22
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 2
 description: "LangGraph State 설계에서 정해야 할 건 두 가지 — 스키마(TypedDict vs Pydantic) 와 같은 키를 동시에 채울 때 합치는 규칙(Reducer). 각 결정을 어디서 어떻게 잡는지 정리한다. 기본은 TypedDict + reducer 없음."
 ---
 

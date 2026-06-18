@@ -3,6 +3,8 @@ title: "LangGraph Part 1 — Your First Graph: Only Where LCEL Falls Short"
 date: 2026-05-18
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 1
 description: "LangGraph isn't an upgrade from LCEL. For straight chains LCEL stays shorter; LangGraph earns its keep the moment branches, cycles, or shared state appear. The smallest possible graph, drawn to mark that boundary."
 ---
 

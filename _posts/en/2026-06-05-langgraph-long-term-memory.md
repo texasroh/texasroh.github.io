@@ -3,6 +3,8 @@ title: "LangGraph Part 6 — The Checkpointer Doesn't Cross Threads"
 date: 2026-06-05
 lang: en
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 6
 description: "Part 5's checkpointer remembers 'this conversation.' But change the thread_id and that memory is gone whole. Memory that persists across a user lives in the Store, not the checkpointer. short-term (thread) and long-term (cross-thread) aren't the same axis — the Store interface, namespaces, semantic search, and the problem that PHI becomes permanent and searchable."
 ---
 

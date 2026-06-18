@@ -3,6 +3,8 @@ title: "LangGraph 3편 — Send: edge로 못 그리는 동적 fan-out"
 date: 2026-05-30
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 3
 description: "그래프의 edge는 plain이든 conditional이든 갈 수 있는 노드가 빌드 타임에 고정된 정적 분기다. fan-out 갈래 수가 런타임에 정해지면 그 정적 edge로는 못 그린다. 그게 Send — LLM 워크플로에 진짜 map-reduce를 박는 도구."
 ---
 

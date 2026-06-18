@@ -3,6 +3,8 @@ title: "LangGraph 5편 — 체크포인트는 멈출 때만 찍히는 게 아니
 date: 2026-06-01
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 5
 description: "4편의 interrupt가 동작한 이유는 checkpointer였다. 그런데 체크포인트는 멈출 때만 찍히는 게 아니라 매 superstep마다 찍힌다. checkpointer는 '사람을 기다리는 도구'가 아니라 그래프 실행 전체에 깔린 persistence layer다. Memory/Sqlite/Postgres는 같은 인터페이스, 다른 내구성."
 ---
 

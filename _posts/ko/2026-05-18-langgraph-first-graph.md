@@ -3,6 +3,8 @@ title: "LangGraph 1편 — 첫 그래프: LCEL로 안 풀리는 것만 그래프
 date: 2026-05-18
 lang: ko
 tags: [langgraph, langchain, llm, python]
+series: langgraph
+seriesOrder: 1
 description: "LangGraph는 LCEL의 상위호환이 아니다. 단방향 체인이면 LCEL이 더 짧고, LangGraph는 분기·사이클·상태가 들어오는 순간부터 의미가 있다. 가장 작은 그래프로 그 경계를 본다."
 ---
 
