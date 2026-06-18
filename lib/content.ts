@@ -69,6 +69,8 @@ export type Post = {
   url: string
   readingMinutes: number
   excerpt: string
+  series?: string
+  seriesOrder?: number
 }
 
 function readContentFiles(dir: string): string[] {
@@ -151,6 +153,14 @@ function parsePost(lang: Language, filePath: string): Post | null {
   const date = normalizeDate(data.date, `${year}-${month}-${day}`)
   const description = typeof data.description === 'string' ? data.description : undefined
   const title = typeof data.title === 'string' ? data.title : slug
+  const series = typeof data.series === 'string' ? data.series : undefined
+  const seriesOrderValue = data.seriesOrder ?? data.series_order
+  const seriesOrder =
+    typeof seriesOrderValue === 'number'
+      ? seriesOrderValue
+      : typeof seriesOrderValue === 'string' && seriesOrderValue.trim()
+        ? Number(seriesOrderValue)
+        : undefined
 
   return {
     id: `${frontmatterLang}/${basename}`,
@@ -164,6 +174,8 @@ function parsePost(lang: Language, filePath: string): Post | null {
     url: `/${frontmatterLang}/blog/${slug}/`,
     readingMinutes: readingMinutes(content, frontmatterLang),
     excerpt: description ?? makeExcerpt(content),
+    series,
+    seriesOrder,
   }
 }
 
@@ -232,6 +244,12 @@ export function getPostBySlug(params: { lang: Language; slug: string }): Post | 
 
 export function getPostTranslation(post: Post, lang: Language): Post | undefined {
   return getAllPosts().find((candidate) => candidate.lang === lang && candidate.slug === post.slug)
+}
+
+export function getSeriesPosts(series: string, lang: Language): Post[] {
+  return getAllPosts()
+    .filter((post) => post.lang === lang && post.series === series)
+    .sort((a, b) => (a.seriesOrder ?? 0) - (b.seriesOrder ?? 0))
 }
 
 export const getResumeContent = cache((lang: Language): ResumeContent => {

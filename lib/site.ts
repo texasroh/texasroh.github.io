@@ -48,6 +48,7 @@ export const UI = {
       backToList: '<- Back to list',
       readingTime: 'min read',
       views: 'views',
+      series: 'In this series',
     },
     footer: {
       copyright: '© 2026 Junhyeok Roh',
@@ -86,6 +87,7 @@ export const UI = {
       backToList: '<- 목록으로 돌아가기',
       readingTime: '분 분량',
       views: '조회',
+      series: '이 시리즈의 다른 글',
     },
     footer: {
       copyright: '© 2026 Junhyeok Roh',

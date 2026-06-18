@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getAllPosts, getPostBySlug, getPostTranslation } from '@/lib/content'
+import { getAllPosts, getPostBySlug, getPostTranslation, getSeriesPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { MdxContent } from '@/components/MdxContent'
+import { SeriesNav } from '@/components/SeriesNav'
 import { SiteShell } from '@/components/SiteShell'
 import { ViewCount } from '@/components/ViewCount'
 import { UI, absoluteUrl, isLanguage, otherLanguage } from '@/lib/site'
@@ -82,6 +83,7 @@ export default async function PostPage({ params }: PageProps) {
   const t = UI[post.lang]
   const other = otherLanguage(post.lang)
   const translation = getPostTranslation(post, other)
+  const seriesPosts = post.series ? getSeriesPosts(post.series, post.lang) : []
 
   return (
     <SiteShell
@@ -126,7 +128,21 @@ export default async function PostPage({ params }: PageProps) {
           ) : null}
         </header>
 
+        <SeriesNav
+          heading={t.blog.series}
+          posts={seriesPosts}
+          currentSlug={post.slug}
+          className="mb-12"
+        />
+
         <MdxContent source={post.content} className="prose-post" />
+
+        <SeriesNav
+          heading={t.blog.series}
+          posts={seriesPosts}
+          currentSlug={post.slug}
+          className="mt-16"
+        />
       </article>
     </SiteShell>
   )
