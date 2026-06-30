@@ -3,6 +3,8 @@ title: "Designing a Taxi Dispatch System, Part 1 — Skip Distributed, Start wit
 date: 2026-06-15
 lang: en
 tags: [architecture, system-design, dispatch, scalability]
+series: taxi-dispatch
+seriesOrder: 1
 description: "How would you build an Uber-like taxi dispatch system? It's tempting to reach for a fancy distributed architecture, but the first version was probably one server and one database. Part 1 of this series draws the simplest possible whole picture of a dispatch service, and only notes where it starts to creak as traffic grows — the roadmap ahead."
 ---
 
